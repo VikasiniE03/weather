@@ -177,8 +177,8 @@ export const SpatialRadarMap = ({ stations = [], faultStatus, selectedStationId 
             <span className="text-rose-700 font-medium">Active Fault</span>
           </div>
         </div>
-        <div className="text-slate-400">
-          Geodesic: <span className="text-white">WGS-84 Sphere</span>
+        <div className="text-zinc-500">
+          Geodesic: <span className="text-zinc-800 font-semibold">WGS-84 Sphere</span>
         </div>
       </div>
     </div>

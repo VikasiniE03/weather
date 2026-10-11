@@ -8,6 +8,7 @@ import { SpatialRadarMap } from "./components/SpatialRadarMap";
 import { AlertFeed } from "./components/AlertFeed";
 import { AlgorithmExplainerModal } from "./components/AlgorithmExplainerModal";
 import {
+  fetchSyncData,
   fetchStations,
   fetchComparisonData,
   fetchAlerts,
@@ -33,35 +34,49 @@ export function App() {
   // Modals
   const [isExplainerOpen, setIsExplainerOpen] = useState(false);
 
-  // Central refresh function - dynamic for selectedStationId
+  // Central refresh function using unified atomic sync endpoint
   const refreshData = useCallback(async (targetStnId = selectedStationId) => {
     try {
-      const [stnRes, compRes, alertRes, faultRes] = await Promise.all([
-        fetchStations(),
-        fetchComparisonData(targetStnId),
-        fetchAlerts(),
-        getFaultStatus()
-      ]);
-
-      if (stnRes.success) setStations(stnRes.data);
-      if (compRes.success) {
-        setComparisonData(compRes.data);
-        if (compRes.neighbors) setComparisonNeighbors(compRes.neighbors);
+      const res = await fetchSyncData(targetStnId);
+      if (res.success) {
+        if (res.stations) setStations(res.stations);
+        if (res.comparison?.data) {
+          setComparisonData(res.comparison.data);
+          if (res.comparison.neighborIds) setComparisonNeighbors(res.comparison.neighborIds);
+        }
+        if (res.alerts) setAlerts(res.alerts);
+        if (res.faultStatus) setFaultStatus(res.faultStatus);
       }
-      if (alertRes.success) setAlerts(alertRes.data);
-      if (faultRes.success) setFaultStatus(faultRes.data);
     } catch (err) {
-      console.warn("Telemetry polling sync:", err.message);
+      console.warn("Telemetry polling sync error:", err.message);
     }
   }, [selectedStationId]);
 
-  // Initial load and periodic polling every 2.5 seconds
+  // Robust sequential polling with mutex guard (no overlapping requests, no race conditions)
   useEffect(() => {
-    refreshData(selectedStationId);
-    const interval = setInterval(() => {
-      refreshData(selectedStationId);
-    }, 2500);
-    return () => clearInterval(interval);
+    let isMounted = true;
+    let timerId = null;
+    let isPolling = false;
+
+    const poll = async () => {
+      if (isPolling) return;
+      isPolling = true;
+      try {
+        await refreshData(selectedStationId);
+      } finally {
+        isPolling = false;
+        if (isMounted) {
+          timerId = setTimeout(poll, 2500);
+        }
+      }
+    };
+
+    poll();
+
+    return () => {
+      isMounted = false;
+      if (timerId) clearTimeout(timerId);
+    };
   }, [refreshData, selectedStationId]);
 
   // Handler: Select Active Station (All 5 Stations accessible)
@@ -181,6 +196,7 @@ export function App() {
           stations={stations}
           alerts={alerts}
           faultStatus={faultStatus}
+          selectedStationId={selectedStationId}
         />
 
         {/* 3. 5 Stations Status Grid (Click any station to inspect & test) */}

@@ -36,8 +36,56 @@ class TelemetryEngine {
     // Historical alerts log
     this.alerts = [];
 
+    // Track last execution time for serverless clock synchronization
+    this.lastTickTime = Date.now();
+
     // Pre-populate buffer with realistic historical baseline (30 cycles)
     this.warmUpHistory(30);
+  }
+
+  /**
+   * Deterministic station hash for reproducible pseudo-noise.
+   */
+  getStationHash(id) {
+    let h = 0;
+    for (let i = 0; i < id.length; i++) {
+      h = (h * 31 + id.charCodeAt(i)) & 0xffffffff;
+    }
+    return Math.abs(h);
+  }
+
+  /**
+   * High-quality deterministic pseudo-noise in range [-0.5, 0.5].
+   * Ensures identical cycles always produce consistent physical readings across server restarts.
+   */
+  pseudoNoise(stationId, cycle, seed = 1) {
+    const h = this.getStationHash(stationId);
+    const x = Math.sin(h * 0.137 + cycle * 1.618 + seed * 9.283) * 43758.5453;
+    return (x - Math.floor(x)) - 0.5;
+  }
+
+  /**
+   * Automatically advance simulation cycles based on elapsed real-world time.
+   * Ensures smooth, continuous real-time telemetry on both persistent servers and Vercel serverless.
+   */
+  advanceToNow() {
+    const now = Date.now();
+    if (!this.lastTickTime) {
+      this.lastTickTime = now;
+      return;
+    }
+
+    const elapsedMs = now - this.lastTickTime;
+    const cyclesToAdvance = Math.floor(elapsedMs / this.intervalMs);
+
+    if (cyclesToAdvance > 0) {
+      // Advance at most maxHistory steps so long idle periods don't trigger large loops
+      const steps = Math.min(cyclesToAdvance, this.maxHistory);
+      for (let i = 0; i < steps; i++) {
+        this.tick();
+      }
+      this.lastTickTime = now;
+    }
   }
 
   /**
@@ -47,15 +95,24 @@ class TelemetryEngine {
     const now = Date.now();
     const stepMs = this.intervalMs;
 
+    this.history = {};
+    for (const stn of STATIONS) {
+      this.history[stn.id] = [];
+    }
+
+    const startCycle = Math.max(0, this.cycleCount);
     for (let i = points; i >= 1; i--) {
       const timestamp = new Date(now - i * stepMs).toISOString();
-      const syntheticCycle = this.cycleCount++;
+      const syntheticCycle = startCycle + (points - i);
 
       for (const stn of this.stations) {
         const reading = this.generateNaturalTelemetry(stn, syntheticCycle, timestamp);
         this.history[stn.id].push(reading);
       }
     }
+
+    this.cycleCount = startCycle + points;
+    this.lastTickTime = now;
 
     for (const stn of this.stations) {
       const last = this.history[stn.id][this.history[stn.id].length - 1];
@@ -67,23 +124,31 @@ class TelemetryEngine {
   }
 
   /**
-   * Generate natural weather readings with realistic microclimate offsets and stochastic noise.
+   * Generate natural weather readings with realistic microclimate offsets and deterministic noise.
    */
   generateNaturalTelemetry(station, cycle, timestamp) {
-    const wavePhase = cycle * 0.15 + station.elevation * 0.1;
-    const diurnalTempOffset = Math.sin(wavePhase) * 0.55;
+    // Diurnal atmospheric wave (gentle sinusoidal cycle)
+    const diurnalWave = Math.sin((cycle * 0.12) + (station.elevation * 0.08)) * 0.45;
 
-    // Temperature with ±0.25°C stochastic noise
-    const noiseTemp = (Math.random() - 0.5) * 0.5;
-    const temp = Math.round((station.baseTemp + diurnalTempOffset + noiseTemp) * 100) / 100;
+    // Micro-climate local spatial oscillation
+    const microWave = Math.cos((cycle * 0.35) + (station.lat * 10)) * 0.15;
 
-    // Humidity negatively correlated with temperature + natural noise
-    const noiseHum = (Math.random() - 0.5) * 0.8;
-    const hum = Math.round((station.baseHumidity - diurnalTempOffset * 1.8 + noiseHum) * 10) / 10;
+    // Subtle deterministic physical fluctuation (±0.08°C)
+    const sensorNoise = this.pseudoNoise(station.id, cycle, 1) * 0.16;
 
-    // Pressure subtle barometric tide
-    const noisePress = (Math.random() - 0.5) * 0.2;
-    const press = Math.round((station.basePressure + Math.cos(wavePhase * 0.7) * 0.3 + noisePress) * 10) / 10;
+    // Temperature reading
+    const temp = Math.round((station.baseTemp + diurnalWave + microWave + sensorNoise) * 100) / 100;
+
+    // Humidity negatively correlated with temperature + micro-climate moisture variations
+    const diurnalHum = -diurnalWave * 1.8;
+    const microHum = Math.sin((cycle * 0.32) + (station.lon * 10)) * 0.35;
+    const humNoise = this.pseudoNoise(station.id, cycle, 2) * 0.3;
+    const hum = Math.round((station.baseHumidity + diurnalHum + microHum + humNoise) * 10) / 10;
+
+    // Barometric pressure subtle atmospheric tide
+    const pressWave = Math.cos(cycle * 0.08) * 0.25;
+    const pressNoise = this.pseudoNoise(station.id, cycle, 3) * 0.08;
+    const press = Math.round((station.basePressure + pressWave + pressNoise) * 10) / 10;
 
     return {
       timestamp: timestamp || new Date().toISOString(),
@@ -100,6 +165,7 @@ class TelemetryEngine {
    */
   tick() {
     this.cycleCount++;
+    this.lastTickTime = Date.now();
     const timestamp = new Date().toISOString();
 
     for (const stn of this.stations) {
@@ -230,13 +296,20 @@ class TelemetryEngine {
   }
 
   getStations() {
+    this.advanceToNow();
     return this.stations.map((s) => ({
       ...s,
       distanceMatrix: this.distanceMatrix[s.id]
     }));
   }
 
+  getStationReading(stationId) {
+    const stn = this.stations.find((s) => s.id === stationId);
+    return stn?.currentReading || null;
+  }
+
   getStationHistory(stationId) {
+    this.advanceToNow();
     return this.history[stationId] || [];
   }
 
@@ -245,6 +318,7 @@ class TelemetryEngine {
    * Includes both temperature and humidity streams!
    */
   getComparisonData(targetId = "STN-003", customNeighbors = null) {
+    this.advanceToNow();
     const targetHist = this.history[targetId] || [];
 
     // Automatically find nearest neighbors for the chosen targetId using Haversine distance
@@ -300,7 +374,25 @@ class TelemetryEngine {
     };
   }
 
+  /**
+   * Unified atomic sync payload for real-time frontend dashboard.
+   * Prevents race conditions and guarantees complete synchronization across all widgets.
+   */
+  getSyncPayload(targetId = "STN-003", customNeighbors = null) {
+    this.advanceToNow();
+    return {
+      success: true,
+      cycle: this.cycleCount,
+      timestamp: new Date().toISOString(),
+      stations: this.getStations(),
+      comparison: this.getComparisonData(targetId, customNeighbors),
+      alerts: this.getAlerts(),
+      faultStatus: faultInjector.getStatus()
+    };
+  }
+
   getAlerts(activeOnly = false) {
+    this.advanceToNow();
     if (activeOnly) {
       return this.alerts.filter((a) => a.active);
     }

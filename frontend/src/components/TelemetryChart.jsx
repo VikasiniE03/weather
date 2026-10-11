@@ -172,7 +172,11 @@ export const TelemetryChart = ({
                 stroke="#71717A"
                 fontSize={11}
                 tickLine={false}
-                domain={["auto", "auto"]}
+                domain={
+                  selectedMetric === "humidity"
+                    ? [(dataMin) => Math.floor(dataMin - 2), (dataMax) => Math.ceil(dataMax + 2)]
+                    : [(dataMin) => Math.floor(dataMin - 0.5), (dataMax) => Math.ceil(dataMax + 0.5)]
+                }
                 fontFamily="JetBrains Mono"
                 unit={selectedMetric === "humidity" ? "%" : "°"}
               />

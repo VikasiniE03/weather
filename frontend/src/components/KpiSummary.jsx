@@ -1,11 +1,11 @@
 import React from "react";
 import { Server, ShieldCheck, ShieldAlert, Compass, Gauge } from "lucide-react";
 
-export const KpiSummary = ({ stations, alerts, faultStatus }) => {
+export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = "STN-003" }) => {
   const totalStations = stations.length || 5;
   const activeAlerts = alerts.filter((a) => a.active);
   const isAnomaly = activeAlerts.length > 0;
-  const targetStation = stations.find((s) => s.id === "STN-003");
+  const targetStation = stations.find((s) => s.id === selectedStationId) || stations[0];
   const maxConfidence = activeAlerts.length > 0 
     ? Math.max(...activeAlerts.map((a) => a.confidence))
     : targetStation?.anomalyReport?.confidence || 0;

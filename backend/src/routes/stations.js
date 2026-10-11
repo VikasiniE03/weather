@@ -4,6 +4,21 @@ import { telemetryEngine } from "../engine/telemetry.js";
 const router = express.Router();
 
 /**
+ * GET /api/stations/sync
+ * Atomic unified synchronization endpoint returning stations, comparison data, alerts, and fault status.
+ */
+router.get("/sync", (req, res) => {
+  try {
+    const { targetId, neighbors } = req.query;
+    const neighborList = neighbors ? neighbors.split(",") : null;
+    const payload = telemetryEngine.getSyncPayload(targetId || "STN-003", neighborList);
+    res.json(payload);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+});
+
+/**
  * GET /api/stations
  * List all stations with current telemetry readings, anomaly reports, and spatial coordinates.
  */

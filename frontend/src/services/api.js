@@ -5,6 +5,16 @@
 
 const API_BASE = "/api";
 
+export async function fetchSyncData(targetId = "STN-003", neighbors = null) {
+  const params = new URLSearchParams({ targetId });
+  if (neighbors && neighbors.length > 0) {
+    params.set("neighbors", neighbors.join(","));
+  }
+  const res = await fetch(`${API_BASE}/sync?${params}`);
+  if (!res.ok) throw new Error(`HTTP error ${res.status} while fetching sync data`);
+  return res.json();
+}
+
 export async function fetchStations() {
   const res = await fetch(`${API_BASE}/stations`);
   if (!res.ok) throw new Error(`HTTP error ${res.status} while fetching stations`);

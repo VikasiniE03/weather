@@ -3,6 +3,7 @@ import cors from "cors";
 import stationsRouter from "./routes/stations.js";
 import alertsRouter from "./routes/alerts.js";
 import faultRouter from "./routes/fault.js";
+import { telemetryEngine } from "./engine/telemetry.js";
 
 const app = express();
 
@@ -21,6 +22,18 @@ app.use((req, res, next) => {
     }
   });
   next();
+});
+
+// Single atomic sync endpoint for frontend polling
+app.get("/api/sync", (req, res) => {
+  try {
+    const { targetId, neighbors } = req.query;
+    const neighborList = neighbors ? neighbors.split(",") : null;
+    const payload = telemetryEngine.getSyncPayload(targetId || "STN-003", neighborList);
+    res.json(payload);
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
 });
 
 // API Routes

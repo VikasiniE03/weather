@@ -28,12 +28,15 @@ router.get("/status", (req, res) => {
 router.post("/toggle", (req, res) => {
   try {
     const { stationId, metric, enabled, stuckTemperature, stuckHumidity } = req.body || {};
+    const targetId = stationId || faultInjector.targetStationId;
+    const currentReading = telemetryEngine.getStationReading(targetId);
+
     const updatedStatus = faultInjector.toggle({
-      stationId,
+      stationId: targetId,
       metric,
       enabled,
-      stuckTemperature,
-      stuckHumidity
+      stuckTemperature: stuckTemperature !== undefined ? stuckTemperature : currentReading?.temperature,
+      stuckHumidity: stuckHumidity !== undefined ? stuckHumidity : currentReading?.humidity
     });
 
     // Immediately trigger an evaluation cycle so the effect reflects instantly
