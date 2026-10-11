@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Smart India Hackathon (SIH) - AI-based Weather Sensor Anomaly Detection System with Spatial-Temporal Verification",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"cyan,magenta\" \"node backend/src/server.js\" \"npm --prefix frontend run dev\"",
     "start": "node backend/src/server.js",

@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "aero-sense-sensor-anomaly-detection",
   "buildCommand": "npm --prefix frontend run build",
   "outputDirectory": "frontend/dist",
   "rewrites": [
