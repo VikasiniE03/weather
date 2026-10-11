@@ -28,7 +28,7 @@ export const TelemetryChart = ({
   const targetDataKey = selectedMetric === "humidity" ? `${targetId}_hum` : targetId;
   const avgDataKey = selectedMetric === "humidity" ? "neighborHumAvg" : "neighborAvg";
 
-  const neighborColors = ["#10B981", "#A855F7", "#3B82F6", "#EC4899"];
+  const neighborColors = ["#475569", "#64748B", "#94A3B8", "#334155"];
 
   // Custom rich tooltip
   const CustomTooltip = ({ active, payload, label }) => {
@@ -44,11 +44,11 @@ export const TelemetryChart = ({
     const unit = selectedMetric === "humidity" ? "%" : "°C";
 
     return (
-      <div className="bg-[#0E1524]/95 border border-[#1F2E45] rounded-xl p-3 shadow-xl backdrop-blur-md text-xs font-mono">
-        <div className="text-slate-400 border-b border-slate-800 pb-1.5 mb-2 flex justify-between items-center gap-2">
-          <span className="font-bold text-white">CYCLE: {label}</span>
+      <div className="bg-white border border-zinc-200 rounded-xl p-3 shadow-lg text-xs font-mono">
+        <div className="text-zinc-500 border-b border-zinc-100 pb-1.5 mb-2 flex justify-between items-center gap-2">
+          <span className="font-bold text-zinc-900">CYCLE: {label}</span>
           {isMetricFaulted && (
-            <span className="text-rose-400 font-bold px-1.5 py-0.5 rounded bg-rose-950/80 border border-rose-500/40 text-[10px]">
+            <span className="text-rose-700 font-bold px-1.5 py-0.5 rounded bg-rose-50 border border-rose-200 text-[10px]">
               {selectedMetric.toUpperCase()} STUCK FAULT
             </span>
           )}
@@ -59,7 +59,7 @@ export const TelemetryChart = ({
             <div key={item.dataKey} className="flex items-center justify-between space-x-4">
               <div className="flex items-center space-x-1.5">
                 <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: item.color }} />
-                <span className="text-slate-300">
+                <span className="text-zinc-600">
                   {item.dataKey === targetDataKey
                     ? `${targetId} (${targetStation?.name || "Target"})`
                     : item.dataKey === avgDataKey
@@ -67,7 +67,7 @@ export const TelemetryChart = ({
                     : `${item.dataKey.replace("_hum", "")} (Neighbor)`}
                 </span>
               </div>
-              <span className="font-bold text-white">
+              <span className="font-bold text-zinc-900">
                 {item.value !== undefined ? `${item.value?.toFixed(1)}${unit}` : "--"}
               </span>
             </div>
@@ -75,13 +75,13 @@ export const TelemetryChart = ({
         </div>
 
         {diff !== null && (
-          <div className="mt-2.5 pt-2 border-t border-slate-800 flex justify-between text-[11px]">
-            <span className="text-slate-400">Spatial Divergence:</span>
+          <div className="mt-2.5 pt-2 border-t border-zinc-100 flex justify-between text-[11px]">
+            <span className="text-zinc-500">Spatial Divergence:</span>
             <span
               className={`font-bold ${
                 Math.abs(diff) > (selectedMetric === "humidity" ? 3 : 0.4)
-                  ? "text-rose-400"
-                  : "text-emerald-400"
+                  ? "text-rose-600"
+                  : "text-zinc-900"
               }`}
             >
               {diff > 0 ? `+${diff.toFixed(1)}${unit}` : `${diff.toFixed(1)}${unit}`}
@@ -96,26 +96,26 @@ export const TelemetryChart = ({
     selectedMetric === "humidity" ? stnFault?.stuckHumidity : stnFault?.stuckTemperature;
 
   return (
-    <div className="glass-panel rounded-2xl p-5 border border-[#1F2E45] mb-6">
+    <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm mb-6">
       {/* Chart Header & Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-5">
         <div>
           <div className="flex items-center space-x-2">
-            <TrendingUp className="w-4 h-4 text-cyan-400" />
-            <h2 className="text-base font-bold text-white tracking-tight">
+            <TrendingUp className="w-4 h-4 text-zinc-700" />
+            <h2 className="text-base font-bold text-zinc-900 tracking-tight">
               Spatial-Temporal Comparative Time-Series:{" "}
-              <span className="text-cyan-400">{targetStation?.name || targetId}</span>
+              <span className="text-zinc-900 font-extrabold">{targetStation?.name || targetId}</span>
             </h2>
             {isMetricFaulted && (
-              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 border border-rose-500/40 font-bold animate-pulse">
+              <span className="text-[10px] font-mono px-2 py-0.5 rounded bg-rose-50 text-rose-700 border border-rose-200 font-bold animate-pulse">
                 ZERO-VARIANCE FLATLINE
               </span>
             )}
           </div>
-          <p className="text-xs text-slate-400 mt-0.5">
-            Cross-validating <span className="text-white font-mono font-bold">{targetId}</span> against nearest geodesic neighbors:{" "}
+          <p className="text-xs text-zinc-500 mt-0.5">
+            Cross-validating <span className="text-zinc-900 font-mono font-bold">{targetId}</span> against nearest geodesic neighbors:{" "}
             {neighborIds.map((nId, idx) => (
-              <span key={nId} className="font-mono font-bold text-slate-300 mr-2">
+              <span key={nId} className="font-mono font-bold text-zinc-700 mr-2">
                 {nId}
               </span>
             ))}
@@ -124,28 +124,28 @@ export const TelemetryChart = ({
 
         {/* Metric Switcher: Temperature vs Humidity */}
         <div className="flex items-center space-x-2">
-          <span className="text-xs text-slate-400 font-mono mr-1">Channel:</span>
-          <div className="inline-flex rounded-lg p-1 bg-slate-900 border border-slate-800 text-xs font-mono">
+          <span className="text-xs text-zinc-500 font-mono mr-1">Channel:</span>
+          <div className="inline-flex rounded-lg p-1 bg-zinc-100 border border-zinc-200 text-xs font-mono">
             <button
               onClick={() => onSelectMetric("temperature")}
               className={`flex items-center space-x-1 px-3 py-1 rounded-md font-medium transition-colors ${
                 selectedMetric === "temperature"
-                  ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "bg-white text-zinc-900 shadow-xs border border-zinc-200 font-bold"
+                  : "text-zinc-600 hover:text-zinc-900"
               }`}
             >
-              <Thermometer className="w-3.5 h-3.5 text-rose-400" />
+              <Thermometer className="w-3.5 h-3.5 text-zinc-700" />
               <span>Temp (°C)</span>
             </button>
             <button
               onClick={() => onSelectMetric("humidity")}
               className={`flex items-center space-x-1 px-3 py-1 rounded-md font-medium transition-colors ${
                 selectedMetric === "humidity"
-                  ? "bg-cyan-500/20 text-cyan-300 border border-cyan-500/40"
-                  : "text-slate-400 hover:text-slate-200"
+                  ? "bg-white text-zinc-900 shadow-xs border border-zinc-200 font-bold"
+                  : "text-zinc-600 hover:text-zinc-900"
               }`}
             >
-              <Droplets className="w-3.5 h-3.5 text-cyan-400" />
+              <Droplets className="w-3.5 h-3.5 text-zinc-700" />
               <span>Humidity (%)</span>
             </button>
           </div>
@@ -160,16 +160,16 @@ export const TelemetryChart = ({
               data={comparisonData}
               margin={{ top: 10, right: 20, left: -10, bottom: 0 }}
             >
-              <CartesianGrid strokeDasharray="3 3" stroke="#1F2E45" opacity={0.6} />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E4E4E7" opacity={0.8} />
               <XAxis
                 dataKey="time"
-                stroke="#64748B"
+                stroke="#71717A"
                 fontSize={11}
                 tickLine={false}
                 fontFamily="JetBrains Mono"
               />
               <YAxis
-                stroke="#64748B"
+                stroke="#71717A"
                 fontSize={11}
                 tickLine={false}
                 domain={["auto", "auto"]}
@@ -187,26 +187,26 @@ export const TelemetryChart = ({
               {isMetricFaulted && stuckRefValue !== undefined && (
                 <ReferenceLine
                   y={stuckRefValue}
-                  stroke="#F43F5E"
+                  stroke="#E11D48"
                   strokeDasharray="4 4"
                   label={{
                     value: `STUCK CLAMP: ${stuckRefValue}${selectedMetric === "humidity" ? "%" : "°C"}`,
-                    fill: "#F43F5E",
+                    fill: "#E11D48",
                     fontSize: 10,
                     position: "right"
                   }}
                 />
               )}
 
-              {/* Target Station Line (Red if Faulted, Cyan if Normal) */}
+              {/* Target Station Line (Red if Faulted, Deep Graphite if Normal) */}
               <Line
                 type="monotone"
                 dataKey={targetDataKey}
                 name={`${targetId} (${targetStation?.name || "Target"})`}
-                stroke={isMetricFaulted ? "#F43F5E" : "#06B6D4"}
+                stroke={isMetricFaulted ? "#E11D48" : "#18181B"}
                 strokeWidth={isMetricFaulted ? 3.5 : 2.5}
                 dot={false}
-                activeDot={{ r: 6, stroke: "#FFFFFF", strokeWidth: 2 }}
+                activeDot={{ r: 6, stroke: "#18181B", strokeWidth: 2 }}
                 isAnimationActive={false}
               />
 
@@ -234,7 +234,7 @@ export const TelemetryChart = ({
                 type="monotone"
                 dataKey={avgDataKey}
                 name="Neighbor Weighted IDW Expectation"
-                stroke="#F59E0B"
+                stroke="#A1A1AA"
                 strokeWidth={2}
                 strokeDasharray="5 5"
                 dot={false}
@@ -243,19 +243,19 @@ export const TelemetryChart = ({
             </LineChart>
           </ResponsiveContainer>
         ) : (
-          <div className="h-full flex items-center justify-center text-slate-500 font-mono text-sm">
+          <div className="h-full flex items-center justify-center text-zinc-400 font-mono text-sm">
             Acquiring telemetry streams for {targetId}...
           </div>
         )}
       </div>
 
       {/* Chart Footer Insight */}
-      <div className="mt-3 pt-3 border-t border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-slate-400 gap-2 font-mono">
+      <div className="mt-3 pt-3 border-t border-zinc-200 flex flex-col sm:flex-row sm:items-center justify-between text-xs text-zinc-500 gap-2 font-mono">
         <div className="flex items-center space-x-2">
-          <Info className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+          <Info className="w-3.5 h-3.5 text-zinc-600 shrink-0" />
           <span>
             {isMetricFaulted ? (
-              <span className="text-rose-300 font-semibold">
+              <span className="text-rose-700 font-semibold">
                 ALERT: {targetId} {selectedMetric.toUpperCase()} is flatlined while perimeter neighbors exhibit natural atmospheric variance.
               </span>
             ) : (
@@ -265,8 +265,8 @@ export const TelemetryChart = ({
             )}
           </span>
         </div>
-        <div className="text-slate-400">
-          Inverse Distance Weighting: <span className="text-amber-400 font-semibold">p = 1.5</span>
+        <div className="text-zinc-500">
+          Inverse Distance Weighting: <span className="text-zinc-800 font-semibold">p = 1.5</span>
         </div>
       </div>
     </div>

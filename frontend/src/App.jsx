@@ -138,7 +138,7 @@ export function App() {
   const activeAlertCount = alerts.filter((a) => a.active).length;
 
   return (
-    <div className="min-h-screen bg-[#0B0F17] text-slate-100 flex flex-col font-sans selection:bg-cyan-500 selection:text-black">
+    <div className="min-h-screen bg-[#F8F9FA] text-zinc-900 flex flex-col font-sans selection:bg-zinc-900 selection:text-white">
       {/* Top Application Header */}
       <Header
         isLive={true}
@@ -152,11 +152,11 @@ export function App() {
       <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Floating Action Banner */}
         {actionMessage && (
-          <div className="mb-4 p-3 rounded-xl bg-cyan-950/80 border border-cyan-500/50 text-cyan-300 text-xs font-mono flex items-center justify-between shadow-glowCyan animate-in fade-in duration-150">
+          <div className="mb-4 p-3 rounded-xl bg-zinc-900 text-white border border-zinc-800 text-xs font-mono flex items-center justify-between shadow-sm animate-in fade-in duration-150">
             <span>⚡ {actionMessage}</span>
             <button
               onClick={() => setActionMessage(null)}
-              className="text-slate-400 hover:text-white"
+              className="text-zinc-400 hover:text-white"
             >
               ✕
             </button>
@@ -230,15 +230,15 @@ export function App() {
       />
 
       {/* Footer */}
-      <footer className="border-t border-[#1F2E45] bg-[#090D15] py-4 text-xs text-slate-500 font-mono">
+      <footer className="border-t border-zinc-200 bg-white py-4 text-xs text-zinc-500 font-mono">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-2">
           <div>
-            AERO-SENSE // Smart India Hackathon (SIH 2026) • Multi-Station Dual-Metric Anomaly Detection
+            AERO-SENSE // Spatial-Temporal Weather Anomaly Detection Network • Dual-Metric Real-Time AI Verification
           </div>
-          <div className="flex items-center space-x-4 text-slate-400">
+          <div className="flex items-center space-x-4 text-zinc-500">
             <span>Model: Spatial-Temporal Haversine + IDW</span>
             <span>Target: {selectedStationId}</span>
-            <span className="text-emerald-400">Status: Operational</span>
+            <span className="text-emerald-700 font-medium">Status: Operational</span>
           </div>
         </div>
       </footer>

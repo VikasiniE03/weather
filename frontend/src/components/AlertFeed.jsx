@@ -8,16 +8,16 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
   const activeCount = alerts.filter((a) => a.active).length;
 
   return (
-    <div className="glass-panel rounded-2xl p-5 border border-[#1F2E45] mb-6">
+    <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm mb-6">
       {/* Alert Feed Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4">
         <div className="flex items-center space-x-2.5">
-          <ShieldAlert className="w-5 h-5 text-rose-400" />
-          <h2 className="text-base font-bold text-white tracking-tight">
+          <ShieldAlert className="w-5 h-5 text-rose-600" />
+          <h2 className="text-base font-bold text-zinc-900 tracking-tight">
             Anomaly Incident Feed & Mitigation Dispatch
           </h2>
           {activeCount > 0 && (
-            <span className="px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-rose-500/20 text-rose-300 border border-rose-500/40 animate-pulse">
+            <span className="px-2 py-0.5 rounded-full text-xs font-mono font-bold bg-rose-100 text-rose-700 border border-rose-200 animate-pulse">
               {activeCount} ACTIVE
             </span>
           )}
@@ -29,8 +29,8 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
             onClick={() => setFilterActive(!filterActive)}
             className={`px-3 py-1.5 rounded-lg text-xs font-mono font-medium border transition-colors ${
               filterActive
-                ? "bg-rose-500/20 border-rose-500/40 text-rose-300"
-                : "bg-slate-800/80 border-slate-700 text-slate-300 hover:text-white"
+                ? "bg-rose-50 border-rose-300 text-rose-700 font-bold"
+                : "bg-white border-zinc-300 text-zinc-700 hover:bg-zinc-50"
             }`}
           >
             {filterActive ? "Showing Active Only" : "Show All Logged"}
@@ -41,7 +41,7 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
             <button
               onClick={onClearAlerts}
               title="Clear alerts log"
-              className="p-1.5 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-400 hover:text-rose-400 transition-colors"
+              className="p-1.5 rounded-lg bg-white hover:bg-zinc-50 border border-zinc-200 text-zinc-500 hover:text-rose-600 transition-colors shadow-xs"
             >
               <Trash2 className="w-4 h-4" />
             </button>
@@ -57,60 +57,60 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
               key={alert.id}
               className={`rounded-xl p-4 border transition-all ${
                 alert.active
-                  ? "bg-gradient-to-r from-rose-950/40 via-red-950/20 to-slate-900/60 border-rose-500/50 shadow-glowRose"
-                  : "bg-slate-900/50 border-slate-800 opacity-80"
+                  ? "bg-rose-50/50 border-rose-300 shadow-xs"
+                  : "bg-zinc-50 border-zinc-200 opacity-90"
               }`}
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-slate-800/60 pb-2.5">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2 border-b border-zinc-200 pb-2.5">
                 <div className="flex items-center space-x-2.5">
                   <span
                     className={`px-2 py-0.5 rounded font-mono text-[10px] font-bold uppercase tracking-wider ${
                       alert.active
-                        ? "bg-rose-500 text-white animate-pulse"
-                        : "bg-slate-800 text-slate-400"
+                        ? "bg-rose-600 text-white animate-pulse"
+                        : "bg-zinc-200 text-zinc-700"
                     }`}
                   >
                     {alert.active ? "ACTIVE INCIDENT" : "RESOLVED"}
                   </span>
 
-                  <span className="font-mono text-xs font-bold text-white">
+                  <span className="font-mono text-xs font-bold text-zinc-900">
                     {alert.stationId} • {alert.stationName}
                   </span>
 
-                  <span className="text-xs font-mono text-rose-400 font-semibold px-2 py-0.5 rounded bg-rose-950/80 border border-rose-500/40">
+                  <span className="text-xs font-mono text-rose-700 font-semibold px-2 py-0.5 rounded bg-rose-100 border border-rose-200">
                     {alert.faultType}
                   </span>
                 </div>
 
-                <div className="flex items-center space-x-3 text-xs font-mono text-slate-400">
+                <div className="flex items-center space-x-3 text-xs font-mono text-zinc-500">
                   <div className="flex items-center space-x-1">
-                    <Clock className="w-3 h-3 text-slate-500" />
+                    <Clock className="w-3 h-3 text-zinc-400" />
                     <span>{new Date(alert.createdAt).toLocaleTimeString()}</span>
                   </div>
-                  <span className="text-[10px] text-slate-500 font-mono">ID: {alert.id}</span>
+                  <span className="text-[10px] text-zinc-400 font-mono">ID: {alert.id}</span>
                 </div>
               </div>
 
               {/* Anomaly Metrics Row */}
               <div className="mt-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 text-xs font-mono">
                 {/* Confidence Bar */}
-                <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
-                  <div className="text-slate-400 text-[10px] uppercase">AI Confidence</div>
+                <div className="bg-white p-2.5 rounded-lg border border-zinc-200 shadow-xs">
+                  <div className="text-zinc-500 text-[10px] uppercase font-medium">AI Confidence</div>
                   <div className="mt-1 flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-rose-400">{alert.confidence}%</span>
-                    <span className="text-[10px] text-slate-500">Streak: {alert.consecutiveCycles} cycles</span>
+                    <span className="text-sm font-bold text-rose-600">{alert.confidence}%</span>
+                    <span className="text-[10px] text-zinc-500">Streak: {alert.consecutiveCycles} cycles</span>
                   </div>
-                  <div className="w-full bg-slate-800 h-1.5 rounded-full mt-1.5 overflow-hidden">
+                  <div className="w-full bg-zinc-200 h-1.5 rounded-full mt-1.5 overflow-hidden">
                     <div
-                      className="bg-rose-500 h-full rounded-full transition-all"
+                      className="bg-rose-600 h-full rounded-full transition-all"
                       style={{ width: `${alert.confidence}%` }}
                     />
                   </div>
                 </div>
 
                 {/* Stuck vs Expected */}
-                <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800">
-                  <div className="text-slate-400 text-[10px] uppercase">
+                <div className="bg-white p-2.5 rounded-lg border border-zinc-200 shadow-xs">
+                  <div className="text-zinc-500 text-[10px] uppercase font-medium">
                     {alert.primaryMetric === "humidity"
                       ? "Stuck Humidity vs Exp"
                       : alert.primaryMetric === "both"
@@ -118,18 +118,18 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
                       : "Stuck Temp vs Exp"}
                   </div>
                   <div className="mt-1 flex items-baseline justify-between">
-                    <span className="text-sm font-bold text-white">
+                    <span className="text-sm font-bold text-zinc-900">
                       {alert.currentValue}
                       {alert.primaryMetric === "humidity" ? "%" : "°C"}
                     </span>
-                    <span className="text-[11px] text-amber-400">
+                    <span className="text-[11px] text-zinc-600 font-medium">
                       Exp: {alert.expectedValue}
                       {alert.primaryMetric === "humidity" ? "%" : "°C"}
                     </span>
                   </div>
-                  <div className="text-[10px] text-slate-400 mt-1">
+                  <div className="text-[10px] text-zinc-500 mt-1">
                     Divergence:{" "}
-                    <span className="text-rose-400 font-bold">
+                    <span className="text-rose-600 font-bold">
                       +{alert.divergence}
                       {alert.primaryMetric === "humidity" ? "%" : "°C"}
                     </span>
@@ -137,26 +137,26 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
                 </div>
 
                 {/* Spatial Neighbors */}
-                <div className="bg-slate-900/80 p-2 rounded-lg border border-slate-800 sm:col-span-2">
-                  <div className="text-slate-400 text-[10px] uppercase">Verified Spatial Neighbors (Haversine)</div>
-                  <div className="mt-1 text-[11px] text-slate-300">
+                <div className="bg-white p-2.5 rounded-lg border border-zinc-200 shadow-xs sm:col-span-2">
+                  <div className="text-zinc-500 text-[10px] uppercase font-medium">Verified Spatial Neighbors (Haversine)</div>
+                  <div className="mt-1 text-[11px] text-zinc-700">
                     {alert.nearestNeighbors && alert.nearestNeighbors.length > 0 ? (
                       alert.nearestNeighbors.map((n) => `${n.name} (${n.distanceKm}km: ${n.currentTemp}°C)`).join(" • ")
                     ) : (
                       "STN-004 Velachery (2.8km) • STN-005 Adyar (3.9km)"
                     )}
                   </div>
-                  <div className="text-[10px] text-emerald-400 mt-1">
+                  <div className="text-[10px] text-emerald-700 font-medium mt-1">
                     Active variance verified in ambient perimeter
                   </div>
                 </div>
               </div>
 
               {/* Recommended Action */}
-              <div className="mt-3 p-2.5 rounded-lg bg-slate-900/90 border border-slate-800 text-xs flex items-start space-x-2">
-                <Cpu className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
-                <div className="text-slate-300">
-                  <span className="font-bold text-cyan-400 mr-1.5">Remediation Protocol:</span>
+              <div className="mt-3 p-2.5 rounded-lg bg-zinc-100 border border-zinc-200 text-xs flex items-start space-x-2">
+                <Cpu className="w-4 h-4 text-zinc-700 shrink-0 mt-0.5" />
+                <div className="text-zinc-700">
+                  <span className="font-bold text-zinc-900 mr-1.5">Remediation Protocol:</span>
                   {alert.recommendedAction}
                 </div>
               </div>
@@ -164,12 +164,12 @@ export const AlertFeed = ({ alerts = [], onClearAlerts }) => {
           ))}
         </div>
       ) : (
-        <div className="py-10 text-center rounded-xl bg-slate-900/30 border border-dashed border-slate-800">
-          <CheckCircle2 className="w-8 h-8 text-emerald-500 mx-auto opacity-70" />
-          <p className="mt-2 text-sm font-medium text-slate-300">
+        <div className="py-10 text-center rounded-xl bg-zinc-50 border border-dashed border-zinc-300">
+          <CheckCircle2 className="w-8 h-8 text-zinc-400 mx-auto" />
+          <p className="mt-2 text-sm font-medium text-zinc-700">
             No Active Anomalies Detected
           </p>
-          <p className="text-xs text-slate-500 mt-0.5">
+          <p className="text-xs text-zinc-500 mt-0.5">
             All 5 sensor feeds are within normal variance thresholds. Toggle the Fault Switch above to trigger.
           </p>
         </div>

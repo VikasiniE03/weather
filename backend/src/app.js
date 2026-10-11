@@ -42,7 +42,7 @@ app.get("/api/health", (req, res) => {
 // Root API documentation endpoint
 app.get("/api", (req, res) => {
   res.json({
-    service: "AeroSense SIH-2026 Anomaly Detection API",
+    service: "AeroSense Anomaly Detection API",
     endpoints: {
       "GET /api/stations": "List all 5 stations with current telemetry & status",
       "GET /api/stations/:id/history": "Time-series records for station",
@@ -50,7 +50,7 @@ app.get("/api", (req, res) => {
       "GET /api/alerts": "Active and past anomaly alerts",
       "POST /api/alerts/clear": "Clear alert history",
       "GET /api/fault/status": "Fault injector status",
-      "POST /api/fault/toggle": "Toggle stuck sensor fault on STN-003",
+      "POST /api/fault/toggle": "Toggle stuck sensor fault on target station",
       "POST /api/fault/tick": "Trigger manual 1-step telemetry cycle",
       "POST /api/fault/reset": "Reset simulation to initial baseline"
     }

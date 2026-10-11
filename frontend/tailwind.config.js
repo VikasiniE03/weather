@@ -9,18 +9,18 @@ export default {
     extend: {
       colors: {
         command: {
-          bg: "#0B0F17",
-          panel: "#111827",
-          card: "#162032",
-          border: "#1F2E45",
-          highlight: "#2B3F5E"
+          bg: "#F8F9FA",
+          panel: "#FFFFFF",
+          card: "#FFFFFF",
+          border: "#E4E4E7",
+          highlight: "#F4F4F5"
         },
         telemetry: {
-          cyan: "#06B6D4",
-          emerald: "#10B981",
-          amber: "#F59E0B",
-          rose: "#F43F5E",
-          purple: "#8B5CF6"
+          dark: "#18181B",
+          slate: "#475569",
+          gray: "#71717A",
+          lightGray: "#E4E4E7",
+          rose: "#E11D48"
         }
       },
       fontFamily: {
@@ -28,9 +28,9 @@ export default {
         mono: ["JetBrains Mono", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "monospace"]
       },
       boxShadow: {
-        glowCyan: "0 0 20px -3px rgba(6, 182, 212, 0.35)",
-        glowRose: "0 0 25px -2px rgba(244, 63, 94, 0.45)",
-        glowEmerald: "0 0 20px -3px rgba(16, 185, 129, 0.35)"
+        soft: "0 2px 8px -2px rgba(0, 0, 0, 0.05)",
+        card: "0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05)",
+        glowRose: "0 0 20px -2px rgba(225, 29, 72, 0.25)"
       },
       animation: {
         pulseFast: "pulse 1.2s cubic-bezier(0.4, 0, 0.6, 1) infinite",

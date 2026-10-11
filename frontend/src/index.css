@@ -3,52 +3,53 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
-  background-color: #0B0F17;
-  color: #E2E8F0;
+  background-color: #F8F9FA;
+  color: #18181B;
   overflow-x: hidden;
 }
 
-/* Custom Sleek Scrollbar */
+/* Custom Minimalist Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #0D131F;
+  background: #F1F3F5;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1F2E45;
+  background: #D1D5DB;
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #06B6D4;
+  background: #9CA3AF;
 }
 
-/* Glassmorphism Panel Class */
+/* Glassmorphism Panel Class in Shades of White & Gray */
 .glass-panel {
-  background: rgba(17, 24, 39, 0.75);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(31, 46, 69, 0.8);
+  border: 1px solid #E4E4E7;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.04), 0 1px 2px -1px rgba(0, 0, 0, 0.04);
 }
 
 .glass-panel-danger {
-  background: rgba(30, 15, 25, 0.75);
+  background: rgba(255, 250, 250, 0.95);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(244, 63, 94, 0.4);
+  border: 1px solid #FECDD3;
 }
 
-/* Grid Background Texture */
+/* Minimalist Dot & Grid Background Texture */
 .cyber-grid {
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 32px 32px;
+    linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 28px 28px;
 }

@@ -31,12 +31,12 @@ export const StationCard = ({
       onClick={() => onSelect(station.id)}
       className={`rounded-xl p-4 transition-all duration-200 cursor-pointer border relative overflow-hidden ${
         isAnomaly
-          ? "bg-gradient-to-b from-rose-950/40 to-slate-900/90 border-rose-500/60 shadow-glowRose"
+          ? "bg-rose-50/70 border-2 border-rose-400 shadow-md"
           : isWarning
-          ? "bg-slate-900/80 border-amber-500/40"
+          ? "bg-amber-50/70 border border-amber-300 shadow-xs"
           : isSelected
-          ? "bg-slate-900/90 border-cyan-500/60 shadow-glowCyan"
-          : "glass-panel hover:border-slate-600 hover:bg-slate-900/60"
+          ? "bg-white border-2 border-zinc-900 shadow-md"
+          : "bg-white border border-zinc-200 hover:border-zinc-300 hover:shadow-md shadow-xs"
       }`}
     >
       {/* Top Header */}
@@ -46,17 +46,17 @@ export const StationCard = ({
             <span
               className={`font-mono text-xs font-bold px-2 py-0.5 rounded border ${
                 isSelected
-                  ? "bg-cyan-950 text-cyan-300 border-cyan-400"
-                  : "bg-slate-800 text-slate-300 border-slate-700"
+                  ? "bg-zinc-900 text-white border-zinc-900"
+                  : "bg-zinc-100 text-zinc-700 border-zinc-200"
               }`}
             >
               {station.code}
             </span>
-            <span className="text-[10px] font-mono text-slate-400">
+            <span className="text-[10px] font-mono text-zinc-500">
               {station.zone}
             </span>
           </div>
-          <h3 className="text-sm font-bold text-white mt-1.5 leading-snug">
+          <h3 className="text-sm font-bold text-zinc-900 mt-1.5 leading-snug">
             {station.name}
           </h3>
         </div>
@@ -64,7 +64,7 @@ export const StationCard = ({
         {/* Status Badge */}
         <div>
           {isAnomaly ? (
-            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-500/20 text-rose-300 border border-rose-500/50 animate-pulse">
+            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-rose-100 text-rose-700 border border-rose-300 animate-pulse">
               <AlertCircle className="w-3 h-3" />
               <span>
                 {isTempFault && isHumFault
@@ -75,11 +75,11 @@ export const StationCard = ({
               </span>
             </span>
           ) : isWarning ? (
-            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40">
+            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
               <span>WATCH</span>
             </span>
           ) : (
-            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-500/10 text-emerald-400 border border-emerald-500/30">
+            <span className="inline-flex items-center space-x-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-50 text-emerald-700 border border-emerald-200">
               <CheckCircle className="w-3 h-3" />
               <span>NORMAL</span>
             </span>
@@ -88,36 +88,36 @@ export const StationCard = ({
       </div>
 
       {/* Metrics Row */}
-      <div className="mt-4 grid grid-cols-3 gap-2 py-2 border-y border-slate-800/80">
+      <div className="mt-4 grid grid-cols-3 gap-2 py-2 border-y border-zinc-200">
         {/* Temperature */}
-        <div className={`text-center p-1 rounded ${isTempFault ? "bg-rose-950/60 border border-rose-500/40" : ""}`}>
-          <div className="flex items-center justify-center space-x-1 text-slate-400 text-[11px]">
-            <Thermometer className="w-3 h-3 text-rose-400" />
+        <div className={`text-center p-1 rounded ${isTempFault ? "bg-rose-100/60 border border-rose-300" : ""}`}>
+          <div className="flex items-center justify-center space-x-1 text-zinc-500 text-[11px]">
+            <Thermometer className="w-3 h-3 text-zinc-600" />
             <span>Temp</span>
           </div>
-          <div className={`text-base font-extrabold font-mono mt-0.5 ${isTempFault ? "text-rose-400 animate-pulse" : "text-white"}`}>
+          <div className={`text-base font-extrabold font-mono mt-0.5 ${isTempFault ? "text-rose-600 animate-pulse" : "text-zinc-900"}`}>
             {temp ? `${temp.toFixed(1)}°` : "--"}
           </div>
         </div>
 
         {/* Humidity */}
-        <div className={`text-center p-1 rounded border-x border-slate-800/80 ${isHumFault ? "bg-rose-950/60 border border-rose-500/40" : ""}`}>
-          <div className="flex items-center justify-center space-x-1 text-slate-400 text-[11px]">
-            <Droplets className="w-3 h-3 text-cyan-400" />
+        <div className={`text-center p-1 rounded border-x border-zinc-200 ${isHumFault ? "bg-rose-100/60 border border-rose-300" : ""}`}>
+          <div className="flex items-center justify-center space-x-1 text-zinc-500 text-[11px]">
+            <Droplets className="w-3 h-3 text-zinc-600" />
             <span>Humidity</span>
           </div>
-          <div className={`text-base font-extrabold font-mono mt-0.5 ${isHumFault ? "text-rose-400 animate-pulse" : "text-white"}`}>
+          <div className={`text-base font-extrabold font-mono mt-0.5 ${isHumFault ? "text-rose-600 animate-pulse" : "text-zinc-900"}`}>
             {hum ? `${hum.toFixed(1)}%` : "--"}
           </div>
         </div>
 
         {/* Pressure */}
         <div className="text-center p-1">
-          <div className="flex items-center justify-center space-x-1 text-slate-400 text-[11px]">
-            <Wind className="w-3 h-3 text-indigo-400" />
+          <div className="flex items-center justify-center space-x-1 text-zinc-500 text-[11px]">
+            <Wind className="w-3 h-3 text-zinc-600" />
             <span>Pressure</span>
           </div>
-          <div className="text-base font-extrabold font-mono text-white mt-0.5">
+          <div className="text-base font-extrabold font-mono text-zinc-900 mt-0.5">
             {press ? `${press.toFixed(0)}` : "--"}
           </div>
         </div>
@@ -125,19 +125,19 @@ export const StationCard = ({
 
       {/* Anomaly Diagnostic Details Banner if Anomaly */}
       {isAnomaly && report && (
-        <div className="mt-2.5 p-2 rounded-lg bg-rose-950/60 border border-rose-500/40 text-[10px] font-mono space-y-1">
-          <div className="flex justify-between text-rose-300 font-bold">
+        <div className="mt-2.5 p-2 rounded-lg bg-rose-100/70 border border-rose-300 text-[10px] font-mono space-y-1">
+          <div className="flex justify-between text-rose-800 font-bold">
             <span>CONFIDENCE: {report.confidence}%</span>
             <span>STREAK: {report.consecutiveStuckCycles} CYCLES</span>
           </div>
           {isTempFault && tempMetrics && (
-            <div className="flex justify-between text-slate-300">
+            <div className="flex justify-between text-zinc-700">
               <span>Temp Clamped: {tempMetrics.currentValue}°C</span>
               <span>Exp: {tempMetrics.expectedValue}°C (Δ{tempMetrics.divergence}°)</span>
             </div>
           )}
           {isHumFault && humMetrics && (
-            <div className="flex justify-between text-slate-300">
+            <div className="flex justify-between text-zinc-700">
               <span>Hum Clamped: {humMetrics.currentValue}%</span>
               <span>Exp: {humMetrics.expectedValue}% (Δ{humMetrics.divergence}%)</span>
             </div>
@@ -146,14 +146,14 @@ export const StationCard = ({
       )}
 
       {/* Footer Info */}
-      <div className="mt-2.5 flex items-center justify-between text-[10px] text-slate-400 font-mono">
+      <div className="mt-2.5 flex items-center justify-between text-[10px] text-zinc-500 font-mono">
         <div className="flex items-center space-x-1">
-          <Navigation className="w-3 h-3 text-slate-500" />
+          <Navigation className="w-3 h-3 text-zinc-400" />
           <span>{station.lat.toFixed(3)}, {station.lon.toFixed(3)}</span>
         </div>
-        <div className="text-[10px] text-slate-400">
+        <div className="text-[10px] text-zinc-500">
           {isSelected ? (
-            <span className="text-cyan-400 font-bold">★ Active Target</span>
+            <span className="text-zinc-900 font-bold">★ Active Target</span>
           ) : (
             <span>Click to select</span>
           )}

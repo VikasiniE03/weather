@@ -25,33 +25,33 @@ export const SpatialRadarMap = ({ stations = [], faultStatus, selectedStationId 
   const isTargetFaulted = targetFault?.enabled;
 
   return (
-    <div className="glass-panel rounded-2xl p-5 border border-[#1F2E45] mb-6 relative overflow-hidden">
+    <div className="bg-white rounded-2xl p-5 border border-zinc-200 shadow-sm mb-6 relative overflow-hidden">
       {/* Header */}
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center space-x-2">
-          <Compass className="w-4 h-4 text-indigo-400" />
-          <h2 className="text-base font-bold text-white tracking-tight">
+          <Compass className="w-4 h-4 text-zinc-700" />
+          <h2 className="text-base font-bold text-zinc-900 tracking-tight">
             Spatial Geodesic Topology
           </h2>
-          <span className="text-xs text-slate-400 font-mono hidden sm:inline">
+          <span className="text-xs text-zinc-500 font-mono hidden sm:inline">
             (Centered on: {selectedStationId})
           </span>
         </div>
-        <div className="text-xs font-mono text-cyan-400 flex items-center space-x-1.5">
-          <span className="w-2 h-2 rounded-full bg-cyan-400 animate-ping" />
+        <div className="text-xs font-mono text-zinc-700 bg-zinc-100 px-2.5 py-1 rounded-full border border-zinc-200 flex items-center space-x-1.5 font-medium">
+          <span className="w-2 h-2 rounded-full bg-zinc-800 animate-ping" />
           <span>Haversine: 15 km</span>
         </div>
       </div>
 
       {/* SVG Radar Map Layout */}
-      <div className="relative w-full h-72 sm:h-80 bg-[#080D16] rounded-xl border border-slate-800/80 overflow-hidden flex items-center justify-center">
+      <div className="relative w-full h-72 sm:h-80 bg-zinc-50 rounded-xl border border-zinc-200 overflow-hidden flex items-center justify-center">
         {/* Background Coordinate Concentric Circles */}
-        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-20">
-          <div className="w-48 h-48 rounded-full border border-cyan-500" />
-          <div className="w-72 h-72 rounded-full border border-indigo-500 absolute" />
-          <div className="w-96 h-96 rounded-full border border-slate-600 absolute" />
-          <div className="w-full h-px bg-slate-700 absolute" />
-          <div className="h-full w-px bg-slate-700 absolute" />
+        <div className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-40">
+          <div className="w-48 h-48 rounded-full border border-zinc-300" />
+          <div className="w-72 h-72 rounded-full border border-zinc-300 absolute" />
+          <div className="w-96 h-96 rounded-full border border-zinc-200 absolute" />
+          <div className="w-full h-px bg-zinc-200 absolute" />
+          <div className="h-full w-px bg-zinc-200 absolute" />
         </div>
 
         {/* SVG Drawing Layer: Dynamic distance lines from selected station */}
@@ -66,10 +66,10 @@ export const SpatialRadarMap = ({ stations = [], faultStatus, selectedStationId 
                   y1={targetCoords.y}
                   x2={coords.x}
                   y2={coords.y}
-                  stroke={isTargetFaulted ? "#F43F5E" : "#06B6D4"}
+                  stroke={isTargetFaulted ? "#E11D48" : "#71717A"}
                   strokeWidth="0.8"
                   strokeDasharray="1.5 1.5"
-                  opacity={isTargetFaulted ? 0.7 : 0.4}
+                  opacity={isTargetFaulted ? 0.8 : 0.4}
                 />
               </g>
             );
@@ -103,34 +103,34 @@ export const SpatialRadarMap = ({ stations = [], faultStatus, selectedStationId 
 
               {/* Station Node Badge */}
               <div
-                className={`relative flex items-center justify-center p-2 rounded-xl transition-transform group-hover:scale-125 shadow-lg border ${
+                className={`relative flex items-center justify-center p-2 rounded-xl transition-transform group-hover:scale-125 shadow-sm border ${
                   isAnomaly || isFaulted
-                    ? "bg-rose-950 border-rose-500 text-rose-300 shadow-glowRose"
+                    ? "bg-rose-600 border-rose-600 text-white"
                     : isTarget
-                    ? "bg-cyan-950 border-cyan-400 text-cyan-300 shadow-glowCyan"
-                    : "bg-slate-900 border-slate-700 text-slate-300 group-hover:border-slate-500"
+                    ? "bg-zinc-900 border-zinc-900 text-white"
+                    : "bg-white border-zinc-300 text-zinc-700 group-hover:border-zinc-500"
                 }`}
               >
                 {isAnomaly || isFaulted ? (
-                  <ShieldAlert className="w-4 h-4 text-rose-400" />
+                  <ShieldAlert className="w-4 h-4 text-white" />
                 ) : (
-                  <Radio className="w-3.5 h-3.5 text-cyan-400" />
+                  <Radio className={`w-3.5 h-3.5 ${isTarget ? "text-white" : "text-zinc-600"}`} />
                 )}
               </div>
 
               {/* Permanent Station Code Label */}
               <div
-                className={`absolute top-full mt-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-mono px-1.5 py-0.5 rounded font-bold border transition-colors ${
+                className={`absolute top-full mt-1 left-1/2 -translate-x-1/2 whitespace-nowrap text-[10px] font-mono px-1.5 py-0.5 rounded font-bold border transition-colors shadow-xs ${
                   isAnomaly || isFaulted
-                    ? "bg-rose-950/90 text-rose-300 border-rose-500/60"
+                    ? "bg-rose-600 text-white border-rose-600"
                     : isTarget
-                    ? "bg-cyan-950/90 text-cyan-300 border-cyan-400"
-                    : "bg-slate-900/90 text-slate-300 border-slate-700 group-hover:border-cyan-500"
+                    ? "bg-zinc-900 text-white border-zinc-900"
+                    : "bg-white text-zinc-700 border-zinc-200 group-hover:border-zinc-400"
                 }`}
               >
                 {stn.code}
                 {!isTarget && distToTarget > 0 && (
-                  <span className="text-[9px] text-slate-400 ml-1 font-normal">
+                  <span className="text-[9px] text-zinc-400 ml-1 font-normal">
                     ({distToTarget}km)
                   </span>
                 )}
@@ -141,20 +141,20 @@ export const SpatialRadarMap = ({ stations = [], faultStatus, selectedStationId 
 
         {/* Hover Station Floating Card */}
         {hoveredStation && (
-          <div className="absolute bottom-3 left-3 bg-[#0E1524]/95 border border-cyan-500/40 rounded-xl p-3 shadow-2xl backdrop-blur-md text-xs font-mono pointer-events-none z-30 min-w-[200px]">
-            <div className="text-cyan-400 font-bold flex justify-between">
+          <div className="absolute bottom-3 left-3 bg-white border border-zinc-200 rounded-xl p-3 shadow-xl text-xs font-mono pointer-events-none z-30 min-w-[200px]">
+            <div className="text-zinc-900 font-bold flex justify-between">
               <span>{hoveredStation.code} - {hoveredStation.name}</span>
             </div>
-            <div className="text-slate-400 text-[10px]">{hoveredStation.zone}</div>
-            <div className="mt-2 grid grid-cols-2 gap-2 text-white border-t border-slate-800 pt-1.5">
+            <div className="text-zinc-500 text-[10px]">{hoveredStation.zone}</div>
+            <div className="mt-2 grid grid-cols-2 gap-2 text-zinc-800 border-t border-zinc-100 pt-1.5">
               <div>
-                Temp: <span className="font-bold text-rose-300">{hoveredStation.currentReading?.temperature?.toFixed(1)}°C</span>
+                Temp: <span className="font-bold text-zinc-900">{hoveredStation.currentReading?.temperature?.toFixed(1)}°C</span>
               </div>
               <div>
-                Hum: <span className="font-bold text-cyan-300">{hoveredStation.currentReading?.humidity?.toFixed(0)}%</span>
+                Hum: <span className="font-bold text-zinc-900">{hoveredStation.currentReading?.humidity?.toFixed(0)}%</span>
               </div>
             </div>
-            <div className="mt-1 text-[10px] text-slate-400">
+            <div className="mt-1 text-[10px] text-zinc-400">
               Coordinates: {hoveredStation.lat.toFixed(4)}°N, {hoveredStation.lon.toFixed(4)}°E
             </div>
           </div>
@@ -162,19 +162,19 @@ export const SpatialRadarMap = ({ stations = [], faultStatus, selectedStationId 
       </div>
 
       {/* Legend */}
-      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-slate-400 font-mono">
+      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-zinc-500 font-mono">
         <div className="flex items-center space-x-3">
           <div className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-cyan-500" />
-            <span>Selected ({selectedStationId})</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-zinc-900" />
+            <span className="text-zinc-700 font-medium">Selected ({selectedStationId})</span>
           </div>
           <div className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-slate-500" />
+            <span className="w-2.5 h-2.5 rounded-full bg-zinc-400" />
             <span>Perimeter Neighbors</span>
           </div>
           <div className="flex items-center space-x-1">
-            <span className="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse" />
-            <span>Active Fault</span>
+            <span className="w-2.5 h-2.5 rounded-full bg-rose-600 animate-pulse" />
+            <span className="text-rose-700 font-medium">Active Fault</span>
           </div>
         </div>
         <div className="text-slate-400">
