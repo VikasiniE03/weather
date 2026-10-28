@@ -1,0 +1,387 @@
+[
+  {
+    "incidentId": "INC-MVSCDMVU-864",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "DUAL_SENSOR_STUCK_FAULT",
+    "primaryMetric": "both",
+    "faultyMetrics": [
+      "temperature",
+      "humidity"
+    ],
+    "severity": "CRITICAL",
+    "status": "RESOLVED",
+    "observedValue": 33.06,
+    "expectedValue": 32.01,
+    "divergence": 1.05,
+    "streakCount": 50,
+    "confidence": 99.2,
+    "reason": "Both Temperature (33.06°C) and Humidity (66.3%) are completely frozen for 5 consecutive cycles while nearby stations are actively fluctuating.",
+    "recommendedAction": "Immediate hardware inspection required on Guindy Tech Park (STN-003). Both Temperature & Humidity sensors frozen. Ingest switched to synthetic spatial IDW stream from nearest healthy stations (STN-004, STN-005, STN-002).",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [
+      {
+        "noteId": "note_1793206000813",
+        "text": "Resolution: Sensor inspected, recalibrated, and nominal.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T16:46:40.813Z"
+      },
+      {
+        "noteId": "note_1793206010600",
+        "text": "Resolution: Sensor inspected, recalibrated, and nominal.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T16:46:50.599Z"
+      },
+      {
+        "noteId": "note_1793206066179",
+        "text": "Resolution: Sensor telemetry recovered to normal dynamic baseline",
+        "authorName": "Automated Self-Healing / Normal Reading Verification",
+        "authorRole": "system",
+        "authorEmail": "",
+        "timestamp": "2026-10-28T16:47:46.178Z"
+      }
+    ],
+    "createdAt": "2026-10-28T16:41:47.036Z",
+    "lastSeenAt": "2026-10-28T16:46:37.621Z",
+    "updatedAt": "2026-10-28T16:46:37.621Z",
+    "acknowledgedAt": "2026-10-28T16:46:23.121Z",
+    "acknowledgedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator"
+    },
+    "resolvedAt": "2026-10-28T16:47:46.178Z",
+    "resolvedBy": {
+      "userId": "SYSTEM_RECOVERY",
+      "name": "Automated Self-Healing / Normal Reading Verification",
+      "role": "system",
+      "resolutionNote": "Sensor telemetry recovered to normal dynamic baseline"
+    }
+  },
+  {
+    "incidentId": "INC-MVSC1UEE-222",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "faultyMetrics": [
+      "temperature"
+    ],
+    "severity": "HIGH",
+    "status": "RESOLVED",
+    "observedValue": 31.66,
+    "expectedValue": 31.85,
+    "divergence": 0.19,
+    "streakCount": 9,
+    "confidence": 82.9,
+    "reason": "Stuck Sensor: Temperature clamped at 31.66°C across 6 consecutive telemetry cycles with zero variance. Neighbor IDW expects 31.62°C.",
+    "recommendedAction": "Recalibrate temperature transducer at Guindy Tech Park (STN-003). Telemetry clamped at 31.66°C while perimeter ambient IDW expectation is 31.62°C.",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [
+      {
+        "noteId": "note_1793205157293",
+        "text": "Resolution: Thermistor cleaned and re-calibrated. Readings normal.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T16:32:37.293Z"
+      }
+    ],
+    "createdAt": "2026-10-28T16:32:36.903Z",
+    "lastSeenAt": "2026-10-28T16:32:36.998Z",
+    "updatedAt": "2026-10-28T16:32:36.998Z",
+    "acknowledgedAt": "2026-10-28T16:32:37.285Z",
+    "acknowledgedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator"
+    },
+    "resolvedAt": "2026-10-28T16:32:37.293Z",
+    "resolvedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "resolutionNote": "Thermistor cleaned and re-calibrated. Readings normal."
+    }
+  },
+  {
+    "incidentId": "INC-MVSBZ4X1-716",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "faultyMetrics": [
+      "temperature"
+    ],
+    "severity": "HIGH",
+    "status": "RESOLVED",
+    "observedValue": 31.66,
+    "expectedValue": 31.85,
+    "divergence": 0.19,
+    "streakCount": 9,
+    "confidence": 82.9,
+    "reason": "Stuck Sensor: Temperature clamped at 31.66°C across 6 consecutive telemetry cycles with zero variance. Neighbor IDW expects 31.62°C.",
+    "recommendedAction": "Recalibrate temperature transducer at Guindy Tech Park (STN-003). Telemetry clamped at 31.66°C while perimeter ambient IDW expectation is 31.62°C.",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [
+      {
+        "noteId": "note_1793205030895",
+        "text": "Resolution: Thermistor cleaned and re-calibrated. Readings normal.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T16:30:30.895Z"
+      }
+    ],
+    "createdAt": "2026-10-28T16:30:30.566Z",
+    "lastSeenAt": "2026-10-28T16:30:30.655Z",
+    "updatedAt": "2026-10-28T16:30:30.655Z",
+    "acknowledgedAt": "2026-10-28T16:30:30.887Z",
+    "acknowledgedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator"
+    },
+    "resolvedAt": "2026-10-28T16:30:30.895Z",
+    "resolvedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "resolutionNote": "Thermistor cleaned and re-calibrated. Readings normal."
+    }
+  },
+  {
+    "incidentId": "INC-MVSBLDKC-606",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "faultyMetrics": [
+      "temperature"
+    ],
+    "severity": "HIGH",
+    "status": "RESOLVED",
+    "observedValue": 31.93,
+    "expectedValue": 31.8,
+    "divergence": 0.13,
+    "streakCount": 8,
+    "confidence": 77,
+    "reason": "Stuck Sensor: Temperature clamped at 31.93°C across 6 consecutive telemetry cycles with zero variance. Neighbor IDW expects 31.78°C.",
+    "recommendedAction": "Recalibrate temperature transducer at Guindy Tech Park (STN-003). Telemetry clamped at 31.93°C while perimeter ambient IDW expectation is 31.78°C.",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [
+      {
+        "noteId": "note_1793204388919",
+        "text": "Resolution: Thermistor cleaned and re-calibrated. Readings normal.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T16:19:48.919Z"
+      }
+    ],
+    "createdAt": "2026-10-28T16:19:48.588Z",
+    "lastSeenAt": "2026-10-28T16:19:48.670Z",
+    "updatedAt": "2026-10-28T16:19:48.670Z",
+    "acknowledgedAt": "2026-10-28T16:19:48.912Z",
+    "acknowledgedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator"
+    },
+    "resolvedAt": "2026-10-28T16:19:48.919Z",
+    "resolvedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "resolutionNote": "Thermistor cleaned and re-calibrated. Readings normal."
+    }
+  },
+  {
+    "incidentId": "INC-MVSB6RO6-636",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "faultyMetrics": [
+      "temperature"
+    ],
+    "severity": "HIGH",
+    "status": "OPEN",
+    "observedValue": 31.66,
+    "expectedValue": 31.85,
+    "divergence": 0.19,
+    "streakCount": 9,
+    "confidence": 82.9,
+    "reason": "Stuck Sensor: Temperature clamped at 31.66°C across 6 consecutive telemetry cycles with zero variance. Neighbor IDW expects 31.62°C.",
+    "recommendedAction": "Recalibrate temperature transducer at Guindy Tech Park (STN-003). Telemetry clamped at 31.66°C while perimeter ambient IDW expectation is 31.62°C.",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [],
+    "createdAt": "2026-10-28T16:08:27.031Z",
+    "lastSeenAt": "2026-10-28T16:08:27.140Z",
+    "updatedAt": "2026-10-28T16:08:27.140Z"
+  },
+  {
+    "incidentId": "INC-MVSB4VWD-156",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "faultyMetrics": [
+      "temperature"
+    ],
+    "severity": "HIGH",
+    "status": "OPEN",
+    "observedValue": 31.66,
+    "expectedValue": 31.85,
+    "divergence": 0.19,
+    "streakCount": 9,
+    "confidence": 82.9,
+    "reason": "Stuck Sensor: Temperature clamped at 31.66°C across 6 consecutive telemetry cycles with zero variance. Neighbor IDW expects 31.62°C.",
+    "recommendedAction": "Recalibrate temperature transducer at Guindy Tech Park (STN-003). Telemetry clamped at 31.66°C while perimeter ambient IDW expectation is 31.62°C.",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [],
+    "createdAt": "2026-10-28T16:06:59.197Z",
+    "lastSeenAt": "2026-10-28T16:06:59.292Z",
+    "updatedAt": "2026-10-28T16:06:59.292Z"
+  },
+  {
+    "incidentId": "INC-MVSB1VG7-168",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "faultyMetrics": [
+      "temperature"
+    ],
+    "severity": "HIGH",
+    "status": "OPEN",
+    "observedValue": 31.66,
+    "expectedValue": 31.85,
+    "divergence": 0.19,
+    "streakCount": 9,
+    "confidence": 82.9,
+    "reason": "Stuck Sensor: Temperature clamped at 31.66°C across 6 consecutive telemetry cycles with zero variance. Neighbor IDW expects 31.62°C.",
+    "recommendedAction": "Recalibrate temperature transducer at Guindy Tech Park (STN-003). Telemetry clamped at 31.66°C while perimeter ambient IDW expectation is 31.62°C.",
+    "assignedOperator": {
+      "id": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "phone": "+91 98403 33003",
+      "email": "operator3@aerosense.gov.in",
+      "role": "Chief IoT Hardware & Transducer Lead"
+    },
+    "notes": [],
+    "createdAt": "2026-10-28T16:04:38.647Z",
+    "lastSeenAt": "2026-10-28T16:04:38.730Z",
+    "updatedAt": "2026-10-28T16:04:38.730Z"
+  },
+  {
+    "incidentId": "INC-TEST-001",
+    "stationId": "STN-003",
+    "stationName": "Guindy Tech Park",
+    "triggerCategory": "SENSOR_FAULT",
+    "faultType": "TEMP_SENSOR_STUCK_FAULT",
+    "primaryMetric": "temperature",
+    "severity": "CRITICAL",
+    "status": "RESOLVED",
+    "streakCount": 6,
+    "observedValue": 32.4,
+    "expectedValue": 30.1,
+    "notes": [
+      {
+        "noteId": "note_1793200745451",
+        "text": "Transducer physical probe inspected.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T15:19:05.451Z"
+      },
+      {
+        "noteId": "note_1793200745456",
+        "text": "Resolution: Transducer re-seated and calibrated.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T15:19:05.455Z"
+      },
+      {
+        "noteId": "note_1793202835130",
+        "text": "Transducer physical probe inspected.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T15:53:55.130Z"
+      },
+      {
+        "noteId": "note_1793202835145",
+        "text": "Resolution: Transducer re-seated and calibrated.",
+        "authorName": "Dr. Karthik Subramanian",
+        "authorRole": "operator",
+        "authorEmail": "operator3@aerosense.gov.in",
+        "timestamp": "2026-10-28T15:53:55.145Z"
+      }
+    ],
+    "createdAt": "2026-10-28T15:19:05.446Z",
+    "lastSeenAt": "2026-10-28T15:53:55.121Z",
+    "updatedAt": "2026-10-28T15:53:55.121Z",
+    "acknowledgedAt": "2026-10-28T15:53:55.129Z",
+    "acknowledgedBy": {
+      "userId": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator"
+    },
+    "resolvedAt": "2026-10-28T15:53:55.145Z",
+    "resolvedBy": {
+      "userId": "OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "resolutionNote": "Transducer re-seated and calibrated."
+    }
+  }
+]

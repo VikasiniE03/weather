@@ -1,0 +1,74 @@
+[
+  {
+    "userId": "USR-ADMIN-01",
+    "email": "admin@aerosense.gov.in",
+    "passwordHash": "$2b$10$xicEmJFGzulsjznY01CPAO/MiJARPfgksdg3sCq0L0oQo1Ypf4fpK",
+    "name": "Chief Meteorological Director",
+    "role": "admin",
+    "assignedStationId": null,
+    "phone": "+91 94440 00001",
+    "status": "ACTIVE",
+    "createdAt": "2026-10-28T14:49:19.201Z",
+    "updatedAt": "2026-10-28T14:49:19.203Z"
+  },
+  {
+    "userId": "USR-OP-001",
+    "email": "operator1@aerosense.gov.in",
+    "passwordHash": "$2b$10$ZM2uPVF0dsBAI16fTFFn0Ojn3uGKtj2ct1eZEnZRPtFEG.CFWkJVS",
+    "name": "Rajesh Kumar",
+    "role": "operator",
+    "assignedStationId": "STN-001",
+    "phone": "+91 98401 11001",
+    "status": "ACTIVE",
+    "createdAt": "2026-10-28T14:49:19.204Z",
+    "updatedAt": "2026-10-28T14:49:19.204Z"
+  },
+  {
+    "userId": "USR-OP-002",
+    "email": "operator2@aerosense.gov.in",
+    "passwordHash": "$2b$10$ZM2uPVF0dsBAI16fTFFn0Ojn3uGKtj2ct1eZEnZRPtFEG.CFWkJVS",
+    "name": "Priya Sharma",
+    "role": "operator",
+    "assignedStationId": "STN-002",
+    "phone": "+91 98402 22002",
+    "status": "ACTIVE",
+    "createdAt": "2026-10-28T14:49:19.207Z",
+    "updatedAt": "2026-10-28T14:49:19.207Z"
+  },
+  {
+    "userId": "USR-OP-003",
+    "email": "operator3@aerosense.gov.in",
+    "passwordHash": "$2b$10$ZM2uPVF0dsBAI16fTFFn0Ojn3uGKtj2ct1eZEnZRPtFEG.CFWkJVS",
+    "name": "Dr. Karthik Subramanian",
+    "role": "operator",
+    "assignedStationId": "STN-003",
+    "phone": "+91 98403 33003",
+    "status": "ACTIVE",
+    "createdAt": "2026-10-28T14:49:19.209Z",
+    "updatedAt": "2026-10-28T14:49:19.209Z"
+  },
+  {
+    "userId": "USR-OP-004",
+    "email": "operator4@aerosense.gov.in",
+    "passwordHash": "$2b$10$ZM2uPVF0dsBAI16fTFFn0Ojn3uGKtj2ct1eZEnZRPtFEG.CFWkJVS",
+    "name": "Ananya Iyer",
+    "role": "operator",
+    "assignedStationId": "STN-004",
+    "phone": "+91 98404 44004",
+    "status": "ACTIVE",
+    "createdAt": "2026-10-28T14:49:19.211Z",
+    "updatedAt": "2026-10-28T14:49:19.211Z"
+  },
+  {
+    "userId": "USR-OP-005",
+    "email": "operator5@aerosense.gov.in",
+    "passwordHash": "$2b$10$ZM2uPVF0dsBAI16fTFFn0Ojn3uGKtj2ct1eZEnZRPtFEG.CFWkJVS",
+    "name": "Vikram Nathan",
+    "role": "operator",
+    "assignedStationId": "STN-005",
+    "phone": "+91 98405 55005",
+    "status": "ACTIVE",
+    "createdAt": "2026-10-28T14:49:19.213Z",
+    "updatedAt": "2026-10-28T14:49:19.213Z"
+  }
+]

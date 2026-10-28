@@ -1,7 +1,15 @@
 import React from "react";
-import { Server, ShieldCheck, ShieldAlert, Compass, Gauge } from "lucide-react";
+import { Server, ShieldCheck, ShieldAlert, Compass, Gauge, Smartphone, Users } from "lucide-react";
 
-export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = "STN-003" }) => {
+export const KpiSummary = ({
+  stations = [],
+  alerts = [],
+  faultStatus,
+  smsLog = [],
+  operators = [],
+  selectedStationId = "STN-003",
+  onOpenOperatorModal
+}) => {
   const totalStations = stations.length || 5;
   const activeAlerts = alerts.filter((a) => a.active);
   const isAnomaly = activeAlerts.length > 0;
@@ -9,14 +17,15 @@ export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = 
   const maxConfidence = activeAlerts.length > 0 
     ? Math.max(...activeAlerts.map((a) => a.confidence))
     : targetStation?.anomalyReport?.confidence || 0;
+  const smsDispatchedCount = smsLog.length;
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
       {/* 1. Total Nodes */}
       <div className="bg-white rounded-xl p-4 border border-zinc-200 shadow-sm hover:border-zinc-300 transition-colors">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-medium">
-            Network Nodes
+            Weather Stations
           </span>
           <div className="p-2 rounded-lg bg-zinc-100 text-zinc-700">
             <Server className="w-4 h-4" />
@@ -29,7 +38,47 @@ export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = 
         <p className="text-[11px] text-zinc-500 mt-1">Metropolitan IoT Sensor Grid</p>
       </div>
 
-      {/* 2. Network Integrity */}
+      {/* 2. Station Operators */}
+      <div
+        onClick={onOpenOperatorModal}
+        className="bg-white rounded-xl p-4 border border-zinc-200 shadow-sm hover:border-zinc-300 transition-colors cursor-pointer group"
+      >
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-medium">
+            Station Operators
+          </span>
+          <div className="p-2 rounded-lg bg-zinc-100 text-zinc-700 group-hover:bg-zinc-900 group-hover:text-white transition-colors">
+            <Users className="w-4 h-4" />
+          </div>
+        </div>
+        <div className="mt-2 flex items-baseline space-x-2">
+          <span className="text-2xl font-extrabold text-zinc-900 font-mono">5</span>
+          <span className="text-xs text-emerald-700 font-medium">/ 5 Assigned</span>
+        </div>
+        <p className="text-[11px] text-zinc-500 mt-1">Direct SMS Alert Ready</p>
+      </div>
+
+      {/* 3. Cellular SMS Alerts */}
+      <div
+        onClick={onOpenOperatorModal}
+        className="bg-white rounded-xl p-4 border border-zinc-200 shadow-sm hover:border-zinc-300 transition-colors cursor-pointer group"
+      >
+        <div className="flex items-center justify-between">
+          <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-medium">
+            Cellular SMS Alerts
+          </span>
+          <div className="p-2 rounded-lg bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white transition-colors">
+            <Smartphone className="w-4 h-4" />
+          </div>
+        </div>
+        <div className="mt-2 flex items-baseline space-x-2">
+          <span className="text-2xl font-extrabold text-zinc-900 font-mono">{smsDispatchedCount}</span>
+          <span className="text-xs text-emerald-700 font-medium">Delivered</span>
+        </div>
+        <p className="text-[11px] text-zinc-500 mt-1">Airtel / Jio / GSM Gateway</p>
+      </div>
+
+      {/* 4. Network Status */}
       <div
         className={`rounded-xl p-4 border transition-colors shadow-sm ${
           isAnomaly
@@ -39,7 +88,7 @@ export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = 
       >
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-medium">
-            Network Status
+            Network Integrity
           </span>
           <div
             className={`p-2 rounded-lg ${
@@ -55,36 +104,19 @@ export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = 
               isAnomaly ? "text-rose-600" : "text-emerald-700"
             }`}
           >
-            {isAnomaly ? `${activeAlerts.length} ANOMALY DETECTED` : "NOMINAL"}
+            {isAnomaly ? `${activeAlerts.length} INCIDENTS` : "NOMINAL"}
           </span>
         </div>
         <p className="text-[11px] text-zinc-500 mt-1">
-          {isAnomaly ? "Hardware Flatline Verified" : "Zero-variance checks passing"}
+          {isAnomaly ? "Operator SMS Dispatched" : "Sensors & Weather Normal"}
         </p>
       </div>
 
-      {/* 3. Spatial Radius */}
+      {/* 5. Peak Anomaly Confidence */}
       <div className="bg-white rounded-xl p-4 border border-zinc-200 shadow-sm hover:border-zinc-300 transition-colors">
         <div className="flex items-center justify-between">
           <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-medium">
-            Spatial Correlator
-          </span>
-          <div className="p-2 rounded-lg bg-zinc-100 text-zinc-700">
-            <Compass className="w-4 h-4" />
-          </div>
-        </div>
-        <div className="mt-2 flex items-baseline space-x-2">
-          <span className="text-2xl font-extrabold text-zinc-900 font-mono">15.0</span>
-          <span className="text-xs text-zinc-600 font-medium">km Radius</span>
-        </div>
-        <p className="text-[11px] text-zinc-500 mt-1">Haversine + IDW Interpolation</p>
-      </div>
-
-      {/* 4. Peak Anomaly Confidence */}
-      <div className="bg-white rounded-xl p-4 border border-zinc-200 shadow-sm hover:border-zinc-300 transition-colors">
-        <div className="flex items-center justify-between">
-          <span className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-medium">
-            AI Confidence Score
+            AI Confidence
           </span>
           <div
             className={`p-2 rounded-lg ${
@@ -114,7 +146,7 @@ export const KpiSummary = ({ stations, alerts, faultStatus, selectedStationId = 
             {maxConfidence > 65 ? "Critical" : maxConfidence > 0 ? "Watch" : "Nominal"}
           </span>
         </div>
-        <p className="text-[11px] text-zinc-500 mt-1">Multi-factor probability model</p>
+        <p className="text-[11px] text-zinc-500 mt-1">Spatial IDW + Zero-Variance</p>
       </div>
     </div>
   );

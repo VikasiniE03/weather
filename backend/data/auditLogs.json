@@ -1,0 +1,753 @@
+[
+  {
+    "logId": "AUDIT-MVSCLC0B-986",
+    "action": "FAULT_CLEARED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "both",
+      "enabled": false
+    },
+    "createdAt": "2026-10-28T16:47:46.187Z"
+  },
+  {
+    "logId": "AUDIT-MVSCL9RA-335",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:47:43.270Z"
+  },
+  {
+    "logId": "AUDIT-MVSCL5B5-683",
+    "action": "USER_LOGOUT",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {},
+    "createdAt": "2026-10-28T16:47:37.505Z"
+  },
+  {
+    "logId": "AUDIT-MVSCK549-919",
+    "action": "INCIDENT_RESOLVED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSCDMVU-864",
+      "resolutionNote": "Sensor inspected, recalibrated, and nominal."
+    },
+    "createdAt": "2026-10-28T16:46:50.601Z"
+  },
+  {
+    "logId": "AUDIT-MVSCJXKH-948",
+    "action": "INCIDENT_RESOLVED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSCDMVU-864",
+      "resolutionNote": "Sensor inspected, recalibrated, and nominal."
+    },
+    "createdAt": "2026-10-28T16:46:40.817Z"
+  },
+  {
+    "logId": "AUDIT-MVSCJJX2-259",
+    "action": "INCIDENT_ACKNOWLEDGED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSCDMVU-864",
+      "note": ""
+    },
+    "createdAt": "2026-10-28T16:46:23.126Z"
+  },
+  {
+    "logId": "AUDIT-MVSCJ0KO-309",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:45:58.056Z"
+  },
+  {
+    "logId": "AUDIT-MVSCIJOQ-503",
+    "action": "USER_LOGOUT",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {},
+    "createdAt": "2026-10-28T16:45:36.170Z"
+  },
+  {
+    "logId": "AUDIT-MVSCGQ7Y-453",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:44:11.326Z"
+  },
+  {
+    "logId": "AUDIT-MVSCG1CP-891",
+    "action": "USER_LOGOUT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {},
+    "createdAt": "2026-10-28T16:43:39.097Z"
+  },
+  {
+    "logId": "AUDIT-MVSCFTBQ-957",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:43:28.694Z"
+  },
+  {
+    "logId": "AUDIT-MVSCEOHW-656",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:42:35.780Z"
+  },
+  {
+    "logId": "AUDIT-MVSCEJ70-670",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:42:28.908Z"
+  },
+  {
+    "logId": "AUDIT-MVSCEHJF-887",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:42:26.763Z"
+  },
+  {
+    "logId": "AUDIT-MVSCEHDI-692",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:42:26.550Z"
+  },
+  {
+    "logId": "AUDIT-MVSCEFQY-821",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:42:24.442Z"
+  },
+  {
+    "logId": "AUDIT-MVSCED8G-234",
+    "action": "TEST_SMS_SENT",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "status": "SIMULATED (No live carrier credentials configured)"
+    },
+    "createdAt": "2026-10-28T16:42:21.184Z"
+  },
+  {
+    "logId": "AUDIT-MVSCDC3W-308",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "both",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:41:33.069Z"
+  },
+  {
+    "logId": "AUDIT-MVSCCQ4Z-161",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:41:04.595Z"
+  },
+  {
+    "logId": "AUDIT-MVSC1UPA-902",
+    "action": "INCIDENT_RESOLVED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSC1UEE-222",
+      "resolutionNote": "Thermistor cleaned and re-calibrated. Readings normal."
+    },
+    "createdAt": "2026-10-28T16:32:37.294Z"
+  },
+  {
+    "logId": "AUDIT-MVSC1UP2-875",
+    "action": "INCIDENT_ACKNOWLEDGED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSC1UEE-222"
+    },
+    "createdAt": "2026-10-28T16:32:37.286Z"
+  },
+  {
+    "logId": "AUDIT-MVSC1UOB-403",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:32:37.259Z"
+  },
+  {
+    "logId": "AUDIT-MVSC1UDV-769",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "temperature",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:32:36.883Z"
+  },
+  {
+    "logId": "AUDIT-MVSC1UD8-635",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:32:36.860Z"
+  },
+  {
+    "logId": "AUDIT-MVSC1U7J-142",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:32:36.655Z"
+  },
+  {
+    "logId": "AUDIT-MVSBZ56A-538",
+    "action": "INCIDENT_RESOLVED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSBZ4X1-716",
+      "resolutionNote": "Thermistor cleaned and re-calibrated. Readings normal."
+    },
+    "createdAt": "2026-10-28T16:30:30.898Z"
+  },
+  {
+    "logId": "AUDIT-MVSBZ560-694",
+    "action": "INCIDENT_ACKNOWLEDGED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSBZ4X1-716"
+    },
+    "createdAt": "2026-10-28T16:30:30.888Z"
+  },
+  {
+    "logId": "AUDIT-MVSBZ55P-656",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:30:30.877Z"
+  },
+  {
+    "logId": "AUDIT-MVSBZ4WD-317",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "temperature",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:30:30.541Z"
+  },
+  {
+    "logId": "AUDIT-MVSBZ4VR-221",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:30:30.519Z"
+  },
+  {
+    "logId": "AUDIT-MVSBZ4OZ-697",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:30:30.275Z"
+  },
+  {
+    "logId": "AUDIT-MVSBLDTJ-556",
+    "action": "INCIDENT_RESOLVED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSBLDKC-606",
+      "resolutionNote": "Thermistor cleaned and re-calibrated. Readings normal."
+    },
+    "createdAt": "2026-10-28T16:19:48.919Z"
+  },
+  {
+    "logId": "AUDIT-MVSBLDTD-732",
+    "action": "INCIDENT_ACKNOWLEDGED",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "incidentId": "INC-MVSBLDKC-606"
+    },
+    "createdAt": "2026-10-28T16:19:48.913Z"
+  },
+  {
+    "logId": "AUDIT-MVSBLDT5-453",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-003",
+      "name": "Dr. Karthik Subramanian",
+      "role": "operator",
+      "email": "operator3@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:19:48.905Z"
+  },
+  {
+    "logId": "AUDIT-MVSBLDJO-673",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "temperature",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:19:48.564Z"
+  },
+  {
+    "logId": "AUDIT-MVSBLDIY-442",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:19:48.538Z"
+  },
+  {
+    "logId": "AUDIT-MVSBLDC3-378",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:19:48.291Z"
+  },
+  {
+    "logId": "AUDIT-MVSB6RNI-988",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "temperature",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:08:27.006Z"
+  },
+  {
+    "logId": "AUDIT-MVSB6RMX-270",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:08:26.985Z"
+  },
+  {
+    "logId": "AUDIT-MVSB6RGP-436",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:08:26.761Z"
+  },
+  {
+    "logId": "AUDIT-MVSB4VVT-681",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "temperature",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:06:59.177Z"
+  },
+  {
+    "logId": "AUDIT-MVSB4VV6-715",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:06:59.154Z"
+  },
+  {
+    "logId": "AUDIT-MVSB4VP1-409",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:06:58.933Z"
+  },
+  {
+    "logId": "AUDIT-MVSB1VFP-431",
+    "action": "FAULT_INJECTED",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": "STN-003",
+    "details": {
+      "faultMode": "STUCK",
+      "metric": "temperature",
+      "enabled": true
+    },
+    "createdAt": "2026-10-28T16:04:38.629Z"
+  },
+  {
+    "logId": "AUDIT-MVSB1VF6-230",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-ADMIN-01",
+      "name": "Chief Meteorological Director",
+      "role": "admin",
+      "email": "admin@aerosense.gov.in"
+    },
+    "targetStationId": null,
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:04:38.610Z"
+  },
+  {
+    "logId": "AUDIT-MVSB1V96-880",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:04:38.394Z"
+  },
+  {
+    "logId": "AUDIT-MVSAZTIO-817",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:03:02.832Z"
+  },
+  {
+    "logId": "AUDIT-MVSAX3MJ-500",
+    "action": "USER_LOGIN",
+    "performedBy": {
+      "userId": "USR-OP-001",
+      "name": "Rajesh Kumar",
+      "role": "operator",
+      "email": "operator1@aerosense.gov.in"
+    },
+    "targetStationId": "STN-001",
+    "details": {
+      "ip": "::1"
+    },
+    "createdAt": "2026-10-28T16:00:55.963Z"
+  },
+  {
+    "logId": "AUDIT-MVS8D08G-688",
+    "action": "DATABASE_SEEDED",
+    "performedBy": {
+      "userId": "SYSTEM",
+      "name": "System",
+      "role": "system",
+      "email": ""
+    },
+    "targetStationId": null,
+    "details": {
+      "stationsCount": 5
+    },
+    "createdAt": "2026-10-28T14:49:19.216Z"
+  }
+]

@@ -1,20 +1,27 @@
 # 🛰️ AERO-SENSE // Smart India Hackathon (SIH 2026)
-### AI-Based Spatial-Temporal Weather Sensor Anomaly Detection & Self-Healing IoT Network
+### AI-Based Spatial-Temporal Weather Sensor Anomaly Detection System & Station Operator Network
 
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 ![Node: >=18](https://img.shields.io/badge/Node-%3E%3D18-brightgreen.svg)
 ![Vite: 5.x](https://img.shields.io/badge/Vite-5.x-purple.svg)
 ![React: 18.x](https://img.shields.io/badge/React-18.x-61dafb.svg)
 ![Tailwind: 3.x](https://img.shields.io/badge/Tailwind-3.x-38bdf8.svg)
-![Vercel: Ready](https://img.shields.io/badge/Deployment-Vercel%20Serverless-black.svg)
+![Security: JWT + RBAC](https://img.shields.io/badge/Security-JWT%20%2B%20RBAC-indigo.svg)
+![Persistence: Hybrid MongoDB](https://img.shields.io/badge/Persistence-MongoDB%20%2B%20FileFallback-emerald.svg)
 
 ---
 
-## 📌 Executive Summary
+## 📌 1. Project Overview & Architecture
 
-**AERO-SENSE** is an industrial-grade, full-stack spatial-temporal telemetry verification system engineered for the Smart India Hackathon (SIH 2026). It solves a fundamental vulnerability in automated weather stations (AWS) and IoT environmental monitoring: **frozen transducers, ADC converter locks, and stuck sensors**.
+**AERO-SENSE** is an industrial-grade, full-stack spatial-temporal weather sensor telemetry verification and emergency management network engineered for the Smart India Hackathon (SIH 2026). It solves critical reliability vulnerabilities in Automated Weather Stations (AWS): **frozen transducers, ADC converter locks, unphysical values, sudden drift spikes, and silent offline dropouts**.
 
-In standard networks, a sensor that locks at a fixed reading (e.g., exactly `32.40°C`) often bypasses crude threshold alerts because `32.40°C` is within valid seasonal limits. AERO-SENSE addresses this by deploying a **4-stage Spatial-Temporal AI Anomaly Detection Engine** that cross-validates readings in real time using great-circle geodesic math (Haversine) and Inverse Distance Weighting (IDW) interpolation from neighboring stations within a 15 km radius.
+Unlike naive single-threshold systems, AERO-SENSE cross-validates telemetry using **great-circle geodesic mathematics (Haversine)** and **Inverse Distance Weighting (IDW) interpolation** from valid, healthy neighboring stations within a configurable 15 km radius.
+
+The system features **two connected but distinct dashboard experiences**:
+1. **Central Monitoring Command Center (Admin Dashboard)**: Unified view across all 5 regional stations, aggregate KPIs, spatial geodesic radar map, comparative time-series analytics, central simulator controls, and system-wide incident logs.
+2. **Individual Weather Station Dashboards (`/station/:id`)**: High-precision telemetry monitors dedicated to each station (`STN-001` through `STN-005`). Features temperature, relative humidity, barometric pressure, ultrasonic 2-axis wind speed/direction, and rainfall pluviometer readings, historical graphs, individual transducer diagnostics, station incident alerts, and acknowledgement/resolution controls.
+
+**Backend-Enforced Station Isolation (RBAC):** Station operators can only view, manage, and receive alerts for their assigned station. An operator assigned to `STN-001` attempting to access `STN-002` via the URL or manual API requests is strictly blocked with **HTTP 403 Forbidden (`ACCESS_DENIED`)**.
 
 ---
 
@@ -22,173 +29,258 @@ In standard networks, a sensor that locks at a fixed reading (e.g., exactly `32.
 
 ```mermaid
 graph TD
-    subgraph "IoT Weather Station Network (Chennai Region)"
-        S1["STN-001 (Marina Coastline)<br/>13.082°N, 80.270°E"]
-        S2["STN-002 (T. Nagar Urban Hub)<br/>13.041°N, 80.234°E"]
-        S3["STN-003 (Guindy Tech Park)<br/>🎯 Primary Fault Target"]
-        S4["STN-004 (Velachery Basin)<br/>12.981°N, 80.218°E"]
-        S5["STN-005 (Adyar Estuary)<br/>13.001°N, 80.256°E"]
+    subgraph "Regional Weather Stations (Chennai Urban Grid)"
+        S1["STN-001 (Marina Coastline)<br/>Operator: K. Rajan (+91 98401 11001)"]
+        S2["STN-002 (T. Nagar Hub)<br/>Operator: S. Meenakshi (+91 98402 22002)"]
+        S3["STN-003 (Guindy Tech Park)<br/>Operator: Dr. K. Subramanian (+91 98403 33003)"]
+        S4["STN-004 (Velachery Basin)<br/>Operator: P. Anbarasan (+91 98404 44004)"]
+        S5["STN-005 (Adyar Estuary)<br/>Operator: V. Jayanthi (+91 98405 55005)"]
     end
 
-    subgraph "Telemetry & Fault Simulation Engine"
-        TICK["Real-Time Mock Engine<br/>5s Cycle • Stochastic Ambient Noise"]
-        FAULT["Fault Injector<br/>Clamps STN-003 to 32.40°C"]
+    subgraph "Telemetry & Multi-Fault Simulator Engine"
+        SIM["Telemetry Engine (5s Cycles)<br/>Wind Vector, Pluviometer, Ambient Noise"]
+        INJECT["Fault Injector (Any Station)<br/>STUCK • SPIKE • INVALID • OFFLINE • SPATIAL"]
     end
 
-    subgraph "Spatial-Temporal AI Anomaly Detector"
-        M1["Stage 1: Zero-Variance Temporal Window<br/>Streak Count ≥ 5 consecutive identical cycles"]
-        M2["Stage 2: Geodesic Neighbor Matrix<br/>Haversine Formula (r ≤ 15 km)"]
-        M3["Stage 3: Inverse Distance Weighting (IDW)<br/>p = 1.5 • Predicted Ambient Curve"]
-        M4["Stage 4: Multi-Factor AI Confidence Scoring<br/>0 - 100% Bayesian-style Certainty"]
+    subgraph "Spatial-Temporal AI Anomaly Detection Engine"
+        ST1["Stage 1: Physical Bounds Verification<br/>Hum 0-100%, Wind ≥ 0, Temp Range"]
+        ST2["Stage 2: Zero-Variance Temporal Window<br/>Identical Streak Count ≥ 5 consecutive cycles"]
+        ST3["Stage 3: Geodesic Haversine Radius<br/>r ≤ 15 km Neighborhood Clustering"]
+        ST4["Stage 4: Inverse Distance Weighting (IDW)<br/>Healthy Baseline Exclusion of Faulty Nodes"]
+        ST5["Stage 5: Explainability & Multi-Factor Confidence<br/>Reasoning, Baseline Delta, Streak Counter"]
     end
 
-    subgraph "Operator Dashboard & Remediation"
-        DASH["React + Vite + Recharts Dashboard<br/>Real-Time Graph • Geodesic Radar Map"]
-        ACT["Automated Fallback Protocol<br/>Synthetic IDW Stream Virtual Sensor"]
+    subgraph "Incident Management & Telecom SMS Pipeline"
+        DEDUP["Central Incident Deduplicator<br/>Cooldown Window & State Tracking"]
+        ROUTER["Targeted Notification Router<br/>Admin & Assigned Operator Only"]
+        SMS["Cellular SMS Gateway<br/>Fast2SMS • Twilio • Honest Simulation Disclosure"]
     end
 
-    S1 & S2 & S4 & S5 --> TICK
-    S3 --> FAULT --> TICK
-    TICK --> M1 --> M2 --> M3 --> M4
-    M4 --> DASH
-    M4 --> ACT
+    subgraph "Database & Persistence Layer"
+        HYBRID["Hybrid Persistence Repository<br/>MongoDB (Mongoose) + Atomic File JSON Store"]
+    end
+
+    subgraph "Presentation Layer"
+        CENTRAL["Combined Central Dashboard (Admin)"]
+        STN_PAGE["Individual Station Dashboard (/station/:id)"]
+    end
+
+    S1 & S2 & S3 & S4 & S5 --> SIM
+    INJECT --> SIM
+    SIM --> ST1 --> ST2 --> ST3 --> ST4 --> ST5
+    ST5 --> DEDUP --> ROUTER
+    DEDUP --> HYBRID
+    ROUTER --> SMS
+    ROUTER --> CENTRAL
+    ROUTER --> STN_PAGE
 ```
 
 ---
 
-## 🧮 Mathematical & Algorithmic Foundation
+## 🧮 2. Anomaly Detection Engine & Supported Fault Modes
 
-### 1. Temporal Zero-Variance Detector
-A rolling window of size $N = 5$ consecutive cycles is monitored for identical telemetry:
-$$\Delta T = |T(t) - T(t-1)| < 0.001^\circ\text{C} \quad \text{and} \quad \sigma^2_{window} < 0.0001$$
-When streak duration $S \ge 5$, the station enters zero-variance suspicion state.
+The detection engine (`backend/src/engine/anomalyDetector.js`) supports 5 distinct fault modes with complete explainability:
 
-### 2. Geodesic Neighbor Clustering (Haversine Formula)
-Computes great-circle distances $d_{i,j}$ between target station $i$ and neighbor $j$ on the WGS-84 Earth sphere ($R = 6,371\text{ km}$):
-$$a = \sin^2\left(\frac{\Delta\phi}{2}\right) + \cos(\phi_1)\cos(\phi_2)\sin^2\left(\frac{\Delta\lambda}{2}\right)$$
-$$c = 2 \cdot \text{atan2}\left(\sqrt{a}, \sqrt{1 - a}\right)$$
-$$d = R \cdot c$$
-Filters all stations within radius $r \le 15.0\text{ km}$.
+| Fault Type | Detection Mechanism | Configurable Threshold |
+|---|---|---|
+| **1. Stuck Sensor** | Zero-variance streak analysis across rolling samples. Proves target is frozen while neighboring stations fluctuate with ambient thermal noise. | Streak $\ge 5$ consecutive cycles |
+| **2. Spatial Deviation** | Geodesic Haversine clustering + Inverse Distance Weighting (IDW). **Excludes faulty/offline stations from the baseline**. | Radius $\le 15\text{ km}$, $\Delta T > 3.5^\circ\text{C}$, $\Delta H > 12\%$ |
+| **3. Invalid Physical Bounds** | Detects physically impossible readings violating atmospheric constraints. | Humidity $\notin [0, 100\%]$, Wind $< 0\text{ km/h}$, Temp $\notin [-10, 60^\circ\text{C}]$ |
+| **4. Sudden Spike / Drop** | Temporal rate-of-change delta comparing consecutive readings. | $\Delta T > 4.0^\circ\text{C}$ per cycle, $\Delta H > 15\%$ per cycle |
+| **5. Offline / Silent Drop** | Transducer connectivity timeout tracking distinct from stuck values. | Communication heartbeat $> 15\text{s}$ timeout |
 
-### 3. Inverse Distance Weighting (IDW) Spatial Interpolation
-Calculates expected ambient temperature $\hat{T}_{\text{expected}}$ from active neighbors:
-$$w_j = \frac{1}{(d_j)^p} \quad (\text{where power } p = 1.5)$$
-$$\hat{T}_{\text{expected}} = \frac{\sum_{j=1}^{K} w_j \cdot T_j}{\sum_{j=1}^{K} w_j}$$
-Computes spatial divergence:
-$$\text{Divergence} = |T_{\text{stuck}} - \hat{T}_{\text{expected}}|$$
-
-### 4. Multi-Factor AI Confidence Scoring (0 - 100%)
-$$C_{\text{total}} = \min(99.2\%, \, C_{\text{streak}} + C_{\text{divergence}} + C_{\text{dynamics}})$$
-- **Streak Factor ($45\% - 65\%$):** $C_{\text{streak}} = \min(65, 45 + (S - 5) \times 5)$
-- **Divergence Factor ($0\% - 22\%$):** $C_{\text{divergence}} = \min(22, \text{Divergence} \times 15)$
-- **Neighbor Dynamic Factor ($0\% - 15\%$):** Proves atmosphere is actively fluctuating ($\sigma_{\text{neighbors}} > 0.10^\circ\text{C}$) while target is flat.
-- **Decision Rule:** When $C_{\text{total}} \ge 65.0\%$, alarm `SENSOR_STUCK_FAULT` is triggered with CRITICAL severity.
+### Explainable Anomaly Payload
+Each incident record contains:
+- `stationId`, `stationName`, `sensorType`, `faultType`
+- `currentValue` (observed reading)
+- `expectedValue` (spatial IDW baseline calculated from healthy neighbors)
+- `divergence` ($|\text{observed} - \text{baseline}|$)
+- `streakCount` (number of identical cycles)
+- `confidence` (calibrated multi-factor heuristic 0–99.2%)
+- `reason` (human-readable diagnostic text explaining the root cause)
+- `recommendedAction` (field inspection guidelines)
 
 ---
 
-## ⚡ Quick Start: Local Execution
+## 👥 3. Authentication & Role-Based Access Control (RBAC)
+
+AERO-SENSE provides secure JWT authentication with bcryptjs password hashing.
+
+### Demo User Accounts
+
+| Role | Name | Email | Password | Accessible Stations |
+|---|---|---|---|---|
+| **Administrator** | Chief Operations Director | `admin@aerosense.gov.in` | `Admin@12345` | Universal (All 5 Stations + Simulator + SMS Config) |
+| **Station Operator** | K. Rajan | `operator1@aerosense.gov.in` | `Operator@12345` | `STN-001` (Marina Coastline) only |
+| **Station Operator** | S. Meenakshi | `operator2@aerosense.gov.in` | `Operator@12345` | `STN-002` (T. Nagar Hub) only |
+| **Station Operator** | Dr. Karthik Subramanian | `operator3@aerosense.gov.in` | `Operator@12345` | `STN-003` (Guindy Tech Park) only |
+| **Station Operator** | P. Anbarasan | `operator4@aerosense.gov.in` | `Operator@12345` | `STN-004` (Velachery Basin) only |
+| **Station Operator** | V. Jayanthi | `operator5@aerosense.gov.in` | `Operator@12345` | `STN-005` (Adyar Estuary) only |
+
+> **Security Verification:** If `operator1` logs in and attempts `GET /api/stations/STN-002` or opens `/station/STN-002`, the server rejects the request with `HTTP 403 Forbidden` and redirects to `/access-denied`.
+
+---
+
+## 💾 4. Database & Persistence Layer
+
+AERO-SENSE uses a **Dual-Driver Persistent Repository (`backend/src/database/repository.js`)**:
+1. **Primary Driver:** MongoDB via Mongoose when `MONGODB_URI` is available.
+2. **Resilient Local Driver:** Automatic persistent file-backed JSON store in `backend/data/` (`users.json`, `stations.json`, `incidents.json`, `notifications.json`, `smsLog.json`, `auditLogs.json`).
+
+> **Zero Data Loss Guarantee:** If MongoDB is offline, data is automatically written to disk atomically. Restarting the backend preserves all incidents, operator phone updates, audit logs, and notification read states.
+
+---
+
+## 📱 5. Real Mobile SMS Gateway Protocol
+
+AERO-SENSE connects to real SMS gateways for operator notifications:
+- **Fast2SMS Integration:** Routes OTP/Quick alerts to Indian 10-digit mobile numbers.
+- **Twilio Integration:** Global E.164 cellular SMS delivery.
+- **Demo Number Protection:** Pre-configured demo numbers (`+91 98401 11001` to `+91 98405 55005`) are protected from accidental carrier billing.
+- **Explicit Simulation Disclosure:** When live credentials are not set, the system explicitly logs `SIMULATED (No live carrier credentials configured)`. It **never falsely claims delivery**.
+- **Anti-Spam Cooldown:** 120-second suppression window prevents spamming operators with identical alerts.
+
+---
+
+## ⚡ 6. Quick Start & Execution Guide
 
 ### Prerequisites
 - Node.js version 18 or higher (`node -v`)
 - npm version 9 or higher (`npm -v`)
+- (Optional) MongoDB running on port 27017
 
-### 1-Click Launch
-Run the concurrent dev command at the root directory:
-
+### 1. Install Dependencies
 ```bash
-# 1. Install all dependencies across root, backend, and frontend
+# Install root, backend, and frontend dependencies
 npm run install:all
+```
 
-# 2. Run backend (Port 5000) and frontend (Port 3000) concurrently
+### 2. Seed Initial Database & Demo Accounts
+```bash
+npm run seed
+```
+
+### 3. Run Automated QA Tests
+```bash
+# Run detection engine unit tests + HTTP API integration test
+npm test
+```
+*Expected output: All 14 tests pass with 0 failures.*
+
+### 4. Build Frontend for Production Validation
+```bash
+npm run build
+```
+
+### 5. Launch the Application
+```bash
+# Concurrently starts Backend (port 5000) and Frontend (port 5173)
 npm run dev
 ```
 
-Open your browser at **http://localhost:3000** to access the operator command center!
+- **Frontend:** http://localhost:5173
+- **Backend API:** http://localhost:5000
+- **API Health:** http://localhost:5000/api/health
 
 ---
 
-## 📡 REST API Reference
+## 🧪 7. 60-Second Demo & Verification Workflow
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `GET` | `/api/stations` | List all 5 stations with real-time metrics, status, and coordinates |
-| `GET` | `/api/stations/:id/history` | Historical time-series window (last 50 data points) for a specific station |
-| `GET` | `/api/stations/comparison` | Multi-line comparative dataset for Target vs Nearest Neighbors (for Recharts) |
-| `GET` | `/api/alerts` | List of active and historical flagged anomalies |
-| `POST` | `/api/alerts/clear` | Clear the alert incident log |
-| `GET` | `/api/fault/status` | Current status of programmatic fault injector |
-| `POST` | `/api/fault/toggle` | **Toggle simulated stuck sensor fault on Station #3 live** |
-| `POST` | `/api/fault/tick` | Advance telemetry simulation by 1 cycle immediately (manual stepping) |
-| `POST` | `/api/fault/reset` | Reset simulation to initial clean baseline |
-
----
-
-## 🚀 Free Vercel Deployment Guide
-
-### Option A: Automated CLI Script (Fastest)
-
-#### On Windows:
-Double-click or run:
-```cmd
-deploy-vercel.bat
-```
-
-#### On Linux / macOS / Git Bash:
-```bash
-chmod +x deploy-vercel.sh
-./deploy-vercel.sh
-```
-
-Follow the standard terminal prompt to link your Vercel account.
+1. **Open Frontend (`http://localhost:5173`)**:
+   - The Central Command Dashboard displays all 5 Chennai stations with live telemetry.
+2. **Login as Operator 1**:
+   - Navigate to `/login` or click **Login**. Click **Quick Demo Login: Operator 1 (Marina STN-001)**.
+   - Click on `STN-001` or "My Station" -> Full access to Marina Coastline telemetry, graphs, and sensor health.
+   - Now change URL to `/station/STN-002` -> **Access Denied Page** appears with HTTP 403 notification.
+3. **Login as Administrator**:
+   - Switch account to **Administrator** (`admin@aerosense.gov.in`).
+   - All 5 station dashboards are accessible.
+4. **Trigger Fault on STN-003**:
+   - On the Central Dashboard banner, click **`🚨 SIMULATE SENSOR FAULT (Station #3: Guindy)`**.
+   - Advance cycles using **"Step Cycle"** or wait for the 5s interval.
+   - After cycle 5, the anomaly detector flags `TEMP_SENSOR_STUCK_FAULT` with high confidence.
+   - An incident `INC-...` is created in persistent storage.
+   - An SMS alert is logged for operator Dr. Karthik Subramanian (`+91 98403 33003`).
+   - A dashboard notification is routed exclusively to Admin and Operator 3.
+5. **Acknowledge and Resolve**:
+   - Go to `/incidents` or open `/station/STN-003`.
+   - Click **Acknowledge** with technician dispatch notes.
+   - Click **Resolve** with repair audit notes. Status updates to `RESOLVED`.
+6. **Restart Backend**:
+   - Stop and restart `node backend/src/server.js`.
+   - Reload the browser -> All incidents, audit trails, and operator logs remain intact!
 
 ---
 
-### Option B: 1-Click GitHub to Vercel (Recommended for SIH Finalists)
+## 📡 8. REST API Endpoint Reference
 
-1. **Initialize Git & Push to GitHub:**
-   ```bash
-   git init
-   git add .
-   git commit -m "feat: AERO-SENSE SIH Weather Anomaly Detection Engine"
-   git branch -M main
-   git remote add origin https://github.com/<YOUR_USERNAME>/<YOUR_REPOSITORY>.git
-   git push -u origin main
-   ```
+### Authentication (`/api/auth`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `POST` | `/api/auth/login` | Public | Authenticate with email/password; returns JWT token & user profile |
+| `GET` | `/api/auth/me` | Bearer | Get current session details and authorized station list |
+| `POST` | `/api/auth/logout` | Bearer | End session and log audit event |
+| `GET` | `/api/auth/demo-credentials` | Public | List all 6 pre-configured evaluation accounts |
 
-2. **Deploy on Vercel:**
-   - Go to [vercel.com](https://vercel.com) and log in with your GitHub account.
-   - Click **"Add New Project"** ➔ Import your repository.
-   - Leave the build settings as default (the included `vercel.json` automatically configures Vite build and the serverless `/api` routing).
-   - Click **"Deploy"**.
-   - Your full-stack live dashboard will be online on a custom `*.vercel.app` URL in ~60 seconds!
+### Stations (`/api/stations`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `GET` | `/api/stations` | Optional | List all 5 stations with telemetry and authorization flags |
+| `GET` | `/api/stations/sync` | Optional | Atomic synchronization endpoint returning stations, comparison, and alerts |
+| `GET` | `/api/stations/:id` | Bearer (RBAC) | Get individual station telemetry, diagnostics, and history. **Operators restricted to assigned station** |
+| `GET` | `/api/stations/:id/history` | Bearer (RBAC) | Last 50 time-series readings for station graphs |
+| `GET` | `/api/stations/comparison` | Optional | Target vs neighbor comparative time-series for Recharts |
+
+### Incidents & Anomaly Alerts (`/api/incidents`, `/api/alerts`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `GET` | `/api/incidents` | Bearer | List incidents. Filtered by station for operators; unfiltered for admin |
+| `GET` | `/api/incidents/:id` | Bearer | Get specific incident details |
+| `POST` | `/api/incidents/:id/acknowledge` | Bearer | Acknowledge incident with inspection note |
+| `POST` | `/api/incidents/:id/resolve` | Bearer | Resolve incident with resolution note |
+| `POST` | `/api/incidents/:id/notes` | Bearer | Add inspection log note |
+| `GET` | `/api/alerts` | Public | Live alert stream |
+| `POST` | `/api/alerts/clear` | Admin | Clear active alert feed |
+
+### Notifications (`/api/notifications`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `GET` | `/api/notifications` | Bearer | Get targeted notifications for user role and station |
+| `GET` | `/api/notifications/unread-count` | Bearer | Fast unread badge counter |
+| `POST` | `/api/notifications/:id/read` | Bearer | Mark notification as read |
+| `POST` | `/api/notifications/mark-all-read` | Bearer | Mark all notifications as read |
+
+### Simulator & Fault Controls (`/api/fault`, `/api/weather`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `GET` | `/api/fault/status` | Public | Current simulation configuration and fault states |
+| `POST` | `/api/fault/toggle` | Admin | Inject/clear faults (STUCK, SPIKE, INVALID, OFFLINE) on any station |
+| `POST` | `/api/fault/tick` | Public | Advance telemetry by 1 cycle immediately |
+| `POST` | `/api/fault/interval` | Admin | Adjust telemetry interval (e.g. 2s, 5s, 10s) |
+| `POST` | `/api/fault/playback` | Admin | Pause or resume automatic telemetry stream |
+| `POST` | `/api/fault/reset` | Admin | Reset entire simulation to nominal baseline |
+| `POST` | `/api/weather/simulate` | Admin | Simulate severe weather emergency (e.g. Cyclone, Heatwave) |
+
+### Operators & SMS Gateway (`/api/operators`, `/api/sms`)
+| Method | Endpoint | Auth | Description |
+|---|---|---|---|
+| `GET` | `/api/operators` | Public | Roster of station operators and phone numbers |
+| `PUT` | `/api/operators/:id` | Admin | Update operator mobile number and notification preferences |
+| `GET` | `/api/sms/log` | Bearer | Retrieve SMS outbox dispatch history (station-filtered) |
+| `POST` | `/api/sms/config` | Admin | Configure Fast2SMS / Twilio credentials |
+| `POST` | `/api/sms/send-test` | Bearer | Send test SMS to assigned operator |
 
 ---
 
-## 🏆 SIH Judge Presentation Walkthrough (60-Second Demo)
+## 🌐 9. Deployment Notes (Serverless vs Persistent)
 
-1. **Show Nominal Baseline:**
-   - Demonstrate the 5 weather stations across Chennai.
-   - Highlight that all stations fluctuate with natural thermal noise (±0.3°C).
-   - Show that the alert feed has 0 active incidents.
-
-2. **Inject Programmatic Hardware Fault:**
-   - Click the prominent button: **`🚨 SIMULATE SENSOR FAULT (Station #3: Guindy)`**.
-   - Explain to judges: *"We are simulating an analog-to-digital transducer lock clamped rigidly at 32.40°C."*
-
-3. **Step Cycles & Watch AI Detection Trigger:**
-   - Either wait for the 5-second interval or click **"Step Cycle"** twice.
-   - As the streak reaches 5 consecutive cycles, observe the badge flash red: **`SENSOR_STUCK_FAULT` (Confidence: 94.2%)**.
-
-4. **Verify Against Spatial Neighbors:**
-   - Point to the interactive **Recharts Time-Series Graph**: STN-003 is a flat horizontal line, while neighbors STN-004 (Velachery) and STN-005 (Adyar) fluctuate normally.
-   - Point to the dashed yellow line representing the AI model's **Inverse Distance Weighted (IDW) expected ambient reading**.
-
-5. **Demonstrate Automated Remediation Protocol:**
-   - Scroll to the **Anomaly Incident Feed**.
-   - Show the automated dispatch message: *Dispatch maintenance technician; reroute IoT gateway ingest pipeline to synthetic spatial IDW virtual sensor stream.*
+> [!NOTE]
+> **Persistent State vs Serverless**: The original prototype included a minimal Vercel serverless configuration. However, **enterprise IoT anomaly detection with continuous 5-second telemetry streams, Socket.IO live updates, and background fault streak counters requires a persistent long-running process**. 
+> - For production deployment, host the Node.js backend on **Render, Railway, Fly.io, AWS ECS, or a VPS** using `npm start`.
+> - Deploy the Vite frontend as a static SPA on **Vercel, Netlify, or Cloudflare Pages** with `VITE_API_URL` pointing to your persistent backend server.
 
 ---
 
 ## 🛡️ License
 
-This project is licensed under the MIT License - built for Smart India Hackathon (SIH 2026).
+Built with ❤️ for **Smart India Hackathon (SIH 2026)**. Licensed under the MIT License.

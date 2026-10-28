@@ -1,13 +1,15 @@
 {
   "name": "aero-sense-sensor-anomaly-detection",
   "version": "1.0.0",
-  "description": "Smart India Hackathon (SIH) - AI-based Weather Sensor Anomaly Detection System with Spatial-Temporal Verification",
+  "description": "AI-based Weather Sensor Anomaly Detection System with Spatial-Temporal Verification",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "concurrently -n \"BACKEND,FRONTEND\" -c \"cyan,magenta\" \"node backend/src/server.js\" \"npm --prefix frontend run dev\"",
     "start": "node backend/src/server.js",
     "build": "npm --prefix frontend run build",
+    "test": "node --test backend/test/engine.test.js backend/test/integration.test.js",
+    "seed": "node backend/src/scripts/seed.js",
     "install:all": "npm install && npm --prefix backend install && npm --prefix frontend install",
     "backend": "node backend/src/server.js",
     "frontend": "npm --prefix frontend run dev"
@@ -18,7 +20,8 @@
     "express": "^4.21.2"
   },
   "devDependencies": {
-    "concurrently": "^8.2.2"
+    "concurrently": "^8.2.2",
+    "vercel": "^65.5.0"
   },
   "keywords": [
     "sih-2026",

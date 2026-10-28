@@ -6,7 +6,8 @@ export const StationGrid = ({
   stations,
   selectedStationId,
   onSelectStation,
-  faultStatus
+  faultStatus,
+  onSmsSent
 }) => {
   return (
     <div className="mb-6">
@@ -17,7 +18,7 @@ export const StationGrid = ({
             Weather Station Telemetry Grid
           </h2>
           <span className="text-xs text-zinc-500 font-mono hidden sm:inline">
-            (All 5 Stations Monitored • Click Any Station to Inspect & Test)
+            (All 5 Stations Monitored • Designated Operator & SMS Alert Pathway)
           </span>
         </div>
         <span className="text-xs text-zinc-500 font-mono">
@@ -33,6 +34,7 @@ export const StationGrid = ({
             isSelected={selectedStationId === stn.id}
             onSelect={onSelectStation}
             faultStatus={faultStatus}
+            onSmsSent={onSmsSent}
           />
         ))}
       </div>
