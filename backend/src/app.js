@@ -81,6 +81,10 @@ app.get("/api/health", (req, res) => {
   });
 });
 
+// Root aliases for service discovery & health probes
+app.get("/health", (req, res) => res.redirect("/api/health"));
+app.get("/", (req, res) => res.redirect("/api"));
+
 // Root API documentation endpoint
 app.get("/api", (req, res) => {
   res.json({

@@ -4,7 +4,13 @@
  * authentication, incidents, notifications, simulator controls, and SMS logs.
  */
 
-const API_BASE = "/api";
+// Resolve API base URL:
+// - In browser runtime, calls route relative to current origin through Vercel's public /api rewrite.
+// - In server/proxy environments, uses the Vercel internal service binding BACKEND_URL if available.
+const API_BASE =
+  typeof window === "undefined" && typeof process !== "undefined" && process.env?.BACKEND_URL
+    ? `${process.env.BACKEND_URL.replace(/\/$/, "")}/api`
+    : (import.meta.env?.VITE_API_URL || "/api");
 
 // Local token management
 let authToken = localStorage.getItem("aerosense_token") || null;
